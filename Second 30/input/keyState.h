@@ -11,7 +11,7 @@ public:
 	void Update(void) override;
 private:
 	void RefKeyData(void);		// Œ»İ‚Ì·°ÃŞ°À‘‚«‚İ
-	void SetKeyConfig(void);	// ·°î•ñ‚Ì‘‚«Š·‚¦
+	//void SetKeyConfig(void);	// ·°î•ñ‚Ì‘‚«Š·‚¦
 	void (KeyState::*func)(void); // ŠÖ”Îß²İÀ
 
 	char _buf[256];

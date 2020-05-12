@@ -3,8 +3,8 @@
 #include <memory>
 #include <Scene\SceneMng.h>
 #include <Scene\BaseScene.h>
-//#include <input\inputState.h>
-//#include <input\keyState.h>
+#include <input\inputState.h>
+#include <input\keyState.h>
 
 class player :
 	public Obj
@@ -16,6 +16,6 @@ public:
 	~player();
 private:
 	void Init(void);
-	//std::shared_ptr<InputState> _input;
+	std::shared_ptr<InputState> _input;
 };
 

@@ -2,7 +2,7 @@
 
 enum class INPUT_ID  // Ï¯Ìß‚Ì·°  Šù’è‚ÌŒ^‚ðŽw’è‚Å‚«‚é
 {
-	A,		// ¶ˆÚ“®
+	LEFT1,		// ¶ˆÚ“®
 	D,		// ‰EˆÚ“®
 	W,		// ãˆÚ“®
 	S,		// ‰ºˆÚ“®

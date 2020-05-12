@@ -17,23 +17,23 @@ KeyState::KeyState()
 	_KeyConDef.emplace_back(KEY_INPUT_UP);
 	_KeyConDef.emplace_back(KEY_INPUT_DOWN);
 
-	//FILE *file;
-	//fopen_s(&file, "data/key.data", "rb");
-	//if (file == nullptr)
-	//{
-	//	_KeyCon = _KeyConDef; // 中身のｺﾋﾟｰ
-	//}
-	//else
-	//{
-	//	//_keyConには値が入っていないから要素(INPUT_ID分)のサイズを確保しないといけない
-	//	_KeyCon.resize(static_cast<int>(end(INPUT_ID())));
-	//	fread(
-	//		_KeyCon.data(),
-	//		sizeof(_KeyCon[0]),
-	//		_KeyCon.size(),
-	//		file);
-	//	fclose(file);
-	//}
+	FILE *file;
+	fopen_s(&file, "data/key.data", "rb");
+	if (file == nullptr)
+	{
+		_KeyCon = _KeyConDef; // 中身のｺﾋﾟｰ
+	}
+	else
+	{
+		//_keyConには値が入っていないから要素(INPUT_ID分)のサイズを確保しないといけない
+		_KeyCon.resize(static_cast<int>(end(INPUT_ID())));
+		fread(
+			_KeyCon.data(),
+			sizeof(_KeyCon[0]),
+			_KeyCon.size(),
+			file);
+		fclose(file);
+	}
 
 	modeKeyOld = 1;	// F1のｵｰﾙﾄﾞｷｰ
 }

@@ -45,8 +45,11 @@ void SceneMng::Run(void)
 
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
 	{
+		AddDrawQue({ IMAGE_ID("背景")[0],400.0,300.0,0 });
 		_activeScene = (*_activeScene).Update(std::move(_activeScene));	// moveを使うことでコピーを作らずに所有権の譲渡ができる
 		// スマートポインタとしてわかりやすいのが上　_activeScene->Update();
+
+		Draw();
 	}
 
 }
@@ -75,5 +78,8 @@ bool SceneMng::SysInit(void)
 	}
 
 	SetDrawScreen(DX_SCREEN_BACK);	// 描画先をﾊﾞｯｸﾊﾞｯﾌｧに設定
+
+	lpImageMng.GetID("背景", "image/haikei.png");
+
 	return false;
 }

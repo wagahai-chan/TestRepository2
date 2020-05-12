@@ -8,7 +8,7 @@ InputState::InputState()
 {
 	for (auto id : INPUT_ID()) // enum class ‚ÌbiginŠÖ”‚ÆendŠÖ”‚ª‚È‚¢‚½‚ßA‚»‚Ìê‚Åì‚é@‚»‚¤‚·‚ê‚Î”ÍˆÍfor•¶‚ªì‚ê‚é
 	{
-		_state.try_emplace(INPUT_ID::A, KeyPair{ 0,1 }); // try_emplace ‚»‚Ìê‚ÅÃŞ°À‚ğì‚é
+		_state.try_emplace(INPUT_ID::LEFT1, KeyPair{ 0,1 }); // try_emplace ‚»‚Ìê‚ÅÃŞ°À‚ğì‚é
 	}
 }
 
