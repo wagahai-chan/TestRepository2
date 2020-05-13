@@ -22,7 +22,7 @@ enum class DRAW_QUE // enum‚ÍŒ^‚ªB–† class‚ğ‚Â‚¯‚é‚Æclass–¼–¼‘O‹óŠÔ‚¾‚©‚çX‚Æ‚
 #define lpSceneMng SceneMng::GetInstance()
 
 using DrawQueT = std::tuple<int, double, double, double>;
-//  id    x        y     rad
+						//  id    x        y     rad
 
 class SceneMng
 {
@@ -52,9 +52,12 @@ public:
 
 	void Run(void);
 	bool AddDrawQue(DrawQueT dQue);
+	bool AddActQue(ActQueT aQue);
 
 	const Vector2 ScreenSize;
 	const Vector2 ScreenCenter;			// ½¸Ø°İ‚Ì’†S
+
+	int pulas = 0.0;
 
 private:
 	static SceneMng* sInstance;
@@ -64,6 +67,7 @@ private:
 	void Draw(void);
 
 	std::vector<DrawQueT> _drawList;
+	std::vector<ActQueT> _actList;
 
 	~SceneMng();
 	SceneMng();

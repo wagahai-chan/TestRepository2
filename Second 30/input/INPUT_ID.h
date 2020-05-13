@@ -2,14 +2,14 @@
 
 enum class INPUT_ID  // ﾏｯﾌﾟのｷｰ  既定の型を指定できる
 {
-	LEFT1,		// 左移動
-	D,		// 右移動
-	W,		// 上移動
-	S,		// 下移動
-	LEFT,
-	RIGHT,
-	UP,
-	DOWN,
+	LEFT,			// 左移動
+	RIGHT,			// 右移動
+	UP,				// 上移動
+	DOWN,			// 下移動
+	LEFTBUTTON,		// 左ボタン
+	RIGHTBUTTON,	// 右ボタン
+	UPBUTTON,		// 上ボタン
+	DOWNBUTTON,		// 下ボタン
 	MAX
 };
 

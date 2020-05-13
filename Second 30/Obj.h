@@ -3,23 +3,23 @@
 #include <memory>
 #include <map>
 #include <common\Vector2.h>
-#include <UNIT_ID.h>
+#include <ACT_ID.h>
 
 enum class STATE
 {
 	NORMAL,	// ’Êí
-	WIN,	// Ÿ—˜
-	LOSE,	// ”s–k
+	GOAL,
+	DEATH,
 	MAX
 };
 
-//enum class UNIT_ID
-//{
-//	NON,
-//	LEFTPL,		// ¶ÌßÚ²Ô°
-//	RIGHTPL,	// ‰EÌßÚ²Ô°
-//	MAX
-//};
+enum class UNIT_ID
+{
+	NON,
+	PLAYER,		// ©·¬×
+	CRIMP,		// áŠQ•¨
+	MAX
+};
 
 class Obj;
 

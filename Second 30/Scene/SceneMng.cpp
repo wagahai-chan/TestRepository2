@@ -7,7 +7,7 @@ SceneMng*  SceneMng::sInstance = nullptr;
 
 SceneMng::SceneMng() :ScreenSize{ 800,600 } // ｺﾝｽﾄﾗｸﾀが走った瞬間、ﾛｯｸがかかる。
 {
-
+	
 }
 
 void SceneMng::Draw(void)
@@ -43,15 +43,18 @@ void SceneMng::Run(void)
 	SysInit();
 	_activeScene = std::make_unique<GameScene>();
 
+
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
 	{
+		_drawList.clear();	// 前ﾌﾚｰﾑの描画する画像を削除する
+
 		AddDrawQue({ IMAGE_ID("背景")[0],400.0,300.0,0 });
 		_activeScene = (*_activeScene).Update(std::move(_activeScene));	// moveを使うことでコピーを作らずに所有権の譲渡ができる
 		// スマートポインタとしてわかりやすいのが上　_activeScene->Update();
+		(*_activeScene).RunActQue(std::move(_actList));
 
 		Draw();
 	}
-
 }
 
 bool SceneMng::AddDrawQue(DrawQueT dQue)
@@ -63,6 +66,13 @@ bool SceneMng::AddDrawQue(DrawQueT dQue)
 	}
 
 	_drawList.emplace_back(dQue);
+	return true;
+}
+
+bool SceneMng::AddActQue(ActQueT aQue)
+{
+	_actList.emplace_back(aQue);
+
 	return true;
 }
 

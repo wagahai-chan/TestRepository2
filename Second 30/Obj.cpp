@@ -100,11 +100,11 @@ bool Obj::SetAlive(bool alive)
 	_alive = alive;
 	if (!_alive)
 	{
-		state(STATE::LOSE);
+		state(STATE::GOAL);
 	}
 	else if (_alive)
 	{
-		state(STATE::WIN);
+		state(STATE::DEATH);
 	}
 	else
 	{

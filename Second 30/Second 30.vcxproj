@@ -124,7 +124,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ACT_ID.cpp" />
+    <ClCompile Include="Crimp\block.cpp" />
     <ClCompile Include="common\ImageMng.cpp" />
+    <ClCompile Include="Scene\func\FuncCheckHit.cpp" />
     <ClCompile Include="input\inputState.cpp" />
     <ClCompile Include="input\INPUT_ID.cpp" />
     <ClCompile Include="input\keyState.cpp" />
@@ -134,10 +137,12 @@
     <ClCompile Include="Scene\BaseScene.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Scene\SceneMng.cpp" />
-    <ClCompile Include="UNIT_ID.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ACT_ID.h" />
+    <ClInclude Include="Crimp\block.h" />
     <ClInclude Include="common\ImageMng.h" />
+    <ClInclude Include="Scene\func\FuncCheckHit.h" />
     <ClInclude Include="input\inputState.h" />
     <ClInclude Include="input\INPUT_ID.h" />
     <ClInclude Include="input\keyState.h" />
@@ -146,7 +151,6 @@
     <ClInclude Include="Scene\GameScene.h" />
     <ClInclude Include="Scene\BaseScene.h" />
     <ClInclude Include="Scene\SceneMng.h" />
-    <ClInclude Include="UNIT_ID.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -14,7 +14,7 @@ private:
 	//void SetKeyConfig(void);	// ·°î•ñ‚Ì‘‚«Š·‚¦
 	void (KeyState::*func)(void); // ŠÖ”Îß²İÀ
 
-	char _buf[256];
+	int _buf[13];
 	std::vector<int>  _KeyCon;
 	std::vector<int>  _KeyConDef;
 
