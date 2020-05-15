@@ -3,6 +3,7 @@
 #include <tuple> 
 #include <common\Vector2.h>
 #include <Scene\BaseScene.h>
+#include <Scene/TitleScene.h>
 #include <common\ImageMng.h>
 #include <vector>
 #include <map>

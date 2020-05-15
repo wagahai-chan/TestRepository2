@@ -90,6 +90,7 @@ bool SceneMng::SysInit(void)
 	SetDrawScreen(DX_SCREEN_BACK);	// •`‰ææ‚ğÊŞ¯¸ÊŞ¯Ì§‚Éİ’è
 
 	lpImageMng.GetID("”wŒi", "image/haikei.png");
+	lpImageMng.GetID("À²ÄÙ", "image/title.png");
 
 	return false;
 }

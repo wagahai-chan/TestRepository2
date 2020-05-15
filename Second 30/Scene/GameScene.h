@@ -3,6 +3,8 @@
 #include <common\ImageMng.h>
 #include <player.h>
 #include <Crimp/block.h>
+#include <Crimp/saw.h>
+#include<Crimp/gate.h>
 #include <Scene\SceneMng.h>
 
 struct FuncCheckHit;

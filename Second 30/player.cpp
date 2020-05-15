@@ -6,6 +6,7 @@
 player::player()
 {
 	_unitID = UNIT_ID::PLAYER;
+	_actID = ACT_ID::FALL;
 	Init();
 }
 
@@ -14,6 +15,7 @@ player::player(Vector2Dbl pos, Vector2Dbl size)
 	_pos = pos;
 	_size = size;
 	_unitID = UNIT_ID::PLAYER;
+	_actID = ACT_ID::FALL;
 	
 	Init();
 }
@@ -21,6 +23,11 @@ player::player(Vector2Dbl pos, Vector2Dbl size)
 
 void player::Update(void)
 {
+	if (DestroyProc())
+	{
+		return;
+	}
+
 	_input->Update();
 
 	/*if (_input->state(INPUT_ID::DOWNBUTTON).first)
@@ -28,7 +35,12 @@ void player::Update(void)
 		_pos.x += 10.0;
 	}*/
 	
+
 	Move();
+
+	lpSceneMng.AddActQue({ ACT_QUE::CHECK_HIT,*this });
+
+	
 
 	Obj::Draw();
 	return;
@@ -54,12 +66,20 @@ void player::Move(void)
 
 	move(_input, INPUT_ID::LEFT, _pos.x, -2);
 	move(_input, INPUT_ID::RIGHT, _pos.x, 2);
-	move(_input, INPUT_ID::UP, _pos.y, -2);
-	move(_input, INPUT_ID::DOWN, _pos.y, 2);
+	/*move(_input, INPUT_ID::UP, _pos.y, -2);
+	move(_input, INPUT_ID::DOWN, _pos.y, 2);*/
+
+	// —Ž‰º
+	if (_actID == ACT_ID::FALL)
+	{
+		_pos.y += 10.0;
+	}
+	
 
 	// ¼Þ¬ÝÌß§Œä
-	if (_input->state(INPUT_ID::LEFTBUTTON).first && !_input->state(INPUT_ID::LEFTBUTTON).second && !flag)
+	if (_input->state(INPUT_ID::LEFTBUTTON).first && !_input->state(INPUT_ID::LEFTBUTTON).second && !flag && _actID == ACT_ID::STOP)
 	{
+		_actID = ACT_ID::JUMP;
 		flag = true;
 		count = 0;
 	}
@@ -68,17 +88,14 @@ void player::Move(void)
 	{
 		if (count < 15)
 		{
-			_pos.y -= 5.0;
+			_pos.y -= 10.0;
 		}
-		else if (15 <= count && count < 30)
-		{
-			_pos.y += 5.0;
-		}
-		else if (count >= 30)
+		else
 		{
 			flag = false;
+			_actID = ACT_ID::FALL;
 		}
-
+		
 		count++;
 	}
 }
@@ -90,7 +107,13 @@ void player::Init(void)
 	data.emplace_back(IMAGE_ID("·¬×")[0], 0);
 	SetAnim(STATE::NORMAL, data);
 
+	data.emplace_back(IMAGE_ID("·¬×")[0], 1);
+	data.emplace_back(-1, 2);
+	SetAnim(STATE::DEATH,data);
+
 	_input = std::make_shared<KeyState>();
+
+	
 
 	state(STATE::NORMAL);
 }

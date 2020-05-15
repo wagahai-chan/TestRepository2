@@ -5,6 +5,9 @@
 
 Obj::Obj()
 {
+	_alive = true;
+	_dead = false;
+	hitFlag = false;
 	_animFrame = 0;
 	_animCount = 0;
 	_rad = 0;
@@ -89,6 +92,21 @@ const UNIT_ID & Obj::unitID() const
 	return _unitID;
 }
 
+const ACT_ID & Obj::actID() const
+{
+	return _actID;
+}
+
+const OBJ_ID & Obj::objID() const
+{
+	return _objID;
+}
+
+const bool Obj::HitFlagRE() const
+{
+	return hitFlag;
+}
+
 bool Obj::SetAnim(const STATE state, AnimVector & data)
 {
 	return (_animMap.try_emplace(state, std::move(data))).second; // first iterator‚ª•Ô‚é second bool’l‚ª•Ô‚é@17ˆÈ~‚µ‚©Žg‚¦‚È‚¢
@@ -114,6 +132,13 @@ bool Obj::SetAlive(bool alive)
 	return true;
 }
 
+void Obj::SetAct(ACT_ID id)
+{
+	_actID = id;
+
+	return;
+}
+
 bool Obj::isAnimEnd(void)
 {
 	// _animMap[_state][_animFrame].first >= 0
@@ -137,4 +162,25 @@ bool Obj::isAnimEnd(void)
 	}
 
 	return false;
+}
+
+bool Obj::HitFlag(bool flag)
+{
+	hitFlag = flag;
+
+	return true;
+}
+
+bool Obj::DestroyProc(void)
+{
+	if (_alive)
+	{
+		return false;
+	}
+	if (isAnimEnd())
+	{
+		_dead = true;
+	}
+
+	return true;
 }

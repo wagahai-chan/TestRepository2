@@ -3,11 +3,12 @@
 enum class ACT_ID
 {
 	NON,
-	STOP,
-	LEFT,
-	RIGHT,
-	JUMP,
-	MAX
+	STOP,		// ‘Т‹@Џу‘Ф
+	FALL,		// —Ћ‰є’†
+	LEFT,		// Ќ¶€Ъ“®’†
+	RIGHT,		// ‰E€Ъ“®’†
+	JUMP,		// јЮ¬ЭМЯ’†
+	MAX		
 };
 
 ACT_ID begin(ACT_ID);

@@ -21,6 +21,14 @@ enum class UNIT_ID
 	MAX
 };
 
+enum class OBJ_ID	// áŠQ•¨µÌŞ¼Şª¸Ä
+{
+	BLOCK,		// ÌŞÛ¯¸
+	SAW,		// ‹˜
+	GATE,		// ºŞ°Ù‚Ì–å
+	MAX
+};
+
 class Obj;
 
 using AnimVector = std::vector<std::pair<int, unsigned int>>;
@@ -41,12 +49,17 @@ public:
 	const Vector2Dbl& pos(void) const;
 	const Vector2Dbl& size(void) const;
 	const UNIT_ID& unitID() const;
+	const ACT_ID& actID() const;
+	const OBJ_ID& objID() const;
+	const bool HitFlagRE() const;
 
 	bool SetAnim(const STATE state, AnimVector& data);
 	virtual bool SetAlive(bool alive);
+	virtual void SetAct(ACT_ID id);
 	bool isAlive(void) { return _alive; }
 	bool isDead(void) { return _dead; }
 	bool isAnimEnd(void);	// ±ÆÒ°¼®İ‚ªI—¹‚µ‚Ä‚¢‚é‚©
+	bool HitFlag(bool flag);		// µÌŞ¼Şª¸Ä‚É“–‚½‚Á‚½‚©
 
 private:
 	std::map<STATE, AnimVector> _animMap;
@@ -55,10 +68,16 @@ private:
 	unsigned int _animCount;	// ±ÆÒ°¼®İ¶³İÄ@‰½‰ñÙ°Ìß‚µ‚½‚©
 
 protected:
+	bool DestroyProc(void);
+
 	bool _alive;		// ¶‚«‚Ä‚¢‚é‚©
 	bool _dead;			// €‚ñ‚Å‚¢‚é‚©
+	bool hitFlag;		// “–‚½‚è”»’è
 
 	UNIT_ID _unitID;
+	ACT_ID _actID;
+	OBJ_ID _objID;
+
 	Vector2Dbl _pos;
 	Vector2Dbl _size;
 	double _rad;		// Šp“x
