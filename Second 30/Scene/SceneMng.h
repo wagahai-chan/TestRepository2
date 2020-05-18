@@ -22,8 +22,8 @@ enum class DRAW_QUE // enum‚ÍŒ^‚ªB–† class‚ğ‚Â‚¯‚é‚Æclass–¼–¼‘O‹óŠÔ‚¾‚©‚çX‚Æ‚
 
 #define lpSceneMng SceneMng::GetInstance()
 
-using DrawQueT = std::tuple<int, double, double, double>;
-						//  id    x        y     rad
+using DrawQueT = std::tuple<int, double, double, double,bool>;
+						//  id    x        y     rad    ”½–Ê
 
 class SceneMng
 {

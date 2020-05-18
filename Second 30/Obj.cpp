@@ -5,12 +5,13 @@
 
 Obj::Obj()
 {
-	_alive = true;
+	_alive = STATE::ALIVE;
 	_dead = false;
 	hitFlag = false;
 	_animFrame = 0;
 	_animCount = 0;
-	_rad = 0;
+	_rad = 0.0;
+	_turn = false;
 	_unitID = UNIT_ID::NON;
 }
 
@@ -42,13 +43,13 @@ void Obj::Draw(void)
 			_animCount = 0;
 		}
 
-		lpSceneMng.AddDrawQue({ _animMap[_state][_animFrame].first,_pos.x,_pos.y,0.0 });
+		lpSceneMng.AddDrawQue({ _animMap[_state][_animFrame].first,_pos.x,_pos.y,_rad ,_turn});
 	}
 }
 
 void Obj::Draw(int id)
 {
-	lpSceneMng.AddDrawQue({ id,_pos.x,_pos.y,_rad });
+	lpSceneMng.AddDrawQue({ id,_pos.x,_pos.y,_rad ,_turn});
 }
 
 Obj::~Obj()
@@ -113,23 +114,41 @@ bool Obj::SetAnim(const STATE state, AnimVector & data)
 					// emplace 新規にﾃﾞｰﾀを入力する tryしてほしいキー　トライした結果
 }
 
-bool Obj::SetAlive(bool alive)
+void Obj::SetAlive(STATE stateID)
 {
-	_alive = alive;
-	if (!_alive)
-	{
-		state(STATE::GOAL);
-	}
-	else if (_alive)
-	{
-		state(STATE::DEATH);
-	}
-	else
-	{
-		// 無し
-	}
+	_alive = stateID;
+	//if (_alive == STATE::DEATH)
+	//{
+	//	state(STATE::DEATH);
+	//}
+	//else if (_alive == STATE::GOAL)
+	//{
+	//	state(STATE::GOAL);
+	//}
+	//else
+	//{
+	//	// 無し
+	//}
 
-	return true;
+	switch (stateID)
+	{
+	case STATE::DEATH:
+		state(STATE::DEATH);
+		break;
+	case STATE::GOAL:
+		state(STATE::GOAL);
+		break;
+	case STATE::RUN:
+		state(STATE::RUN);
+		break;
+	case STATE::JUMP:
+		state(STATE::JUMP);
+		break;
+	default:
+		break;
+
+	}
+	
 }
 
 void Obj::SetAct(ACT_ID id)
@@ -137,6 +156,13 @@ void Obj::SetAct(ACT_ID id)
 	_actID = id;
 
 	return;
+}
+
+bool Obj::SetMove(bool move)
+{
+	_move = move;
+
+	return false;
 }
 
 bool Obj::isAnimEnd(void)
@@ -173,7 +199,7 @@ bool Obj::HitFlag(bool flag)
 
 bool Obj::DestroyProc(void)
 {
-	if (_alive)
+	if (_alive != STATE::DEATH)
 	{
 		return false;
 	}

@@ -8,7 +8,10 @@
 enum class STATE
 {
 	NORMAL,	// ’Êí
+	RUN,
+	JUMP,
 	GOAL,
+	ALIVE,
 	DEATH,
 	MAX
 };
@@ -26,6 +29,7 @@ enum class OBJ_ID	// áŠQ•¨µÌŞ¼Şª¸Ä
 	BLOCK,		// ÌŞÛ¯¸
 	SAW,		// ‹˜
 	GATE,		// ºŞ°Ù‚Ì–å
+	BUTTON,		// ºŞ°Ù‚ğŠJ‚­ÎŞÀİ
 	MAX
 };
 
@@ -54,9 +58,10 @@ public:
 	const bool HitFlagRE() const;
 
 	bool SetAnim(const STATE state, AnimVector& data);
-	virtual bool SetAlive(bool alive);
+	virtual void SetAlive(STATE stateID);
 	virtual void SetAct(ACT_ID id);
-	bool isAlive(void) { return _alive; }
+	virtual bool SetMove(bool move);
+	STATE isAlive(void) { return _alive; }
 	bool isDead(void) { return _dead; }
 	bool isAnimEnd(void);	// ±ÆÒ°¼®İ‚ªI—¹‚µ‚Ä‚¢‚é‚©
 	bool HitFlag(bool flag);		// µÌŞ¼Şª¸Ä‚É“–‚½‚Á‚½‚©
@@ -70,9 +75,10 @@ private:
 protected:
 	bool DestroyProc(void);
 
-	bool _alive;		// ¶‚«‚Ä‚¢‚é‚©
+	STATE _alive;		// ¶‚«‚Ä‚¢‚é‚©
 	bool _dead;			// €‚ñ‚Å‚¢‚é‚©
 	bool hitFlag;		// “–‚½‚è”»’è
+	bool _move;			// “®‚¯‚é‚©
 
 	UNIT_ID _unitID;
 	ACT_ID _actID;
@@ -81,6 +87,7 @@ protected:
 	Vector2Dbl _pos;
 	Vector2Dbl _size;
 	double _rad;		// Šp“x
+	bool _turn;			// ‰æ‘œ”½“]
 };
 
 

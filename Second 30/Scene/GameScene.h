@@ -5,7 +5,9 @@
 #include <Crimp/block.h>
 #include <Crimp/saw.h>
 #include<Crimp/gate.h>
+#include <Crimp/button.h>
 #include <Scene\SceneMng.h>
+#include <Scene/GoalScene.h>
 
 struct FuncCheckHit;
 

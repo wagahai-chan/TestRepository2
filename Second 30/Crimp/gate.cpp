@@ -40,5 +40,8 @@ void gate::Init(void)
 	data.emplace_back(IMAGE_ID("¹Þ°Ä")[0], 0);
 	SetAnim(STATE::NORMAL, data);
 
+	data.emplace_back(IMAGE_ID("¹Þ°Ä")[1], 0);
+	SetAnim(STATE::GOAL, data);
+
 	state(STATE::NORMAL);
 }

@@ -41,7 +41,8 @@ void saw::Update(void)
 void saw::Move(void)
 {
 	_pos.x = _endPos.x + abs(75 - count % (75 * 2));
-	count += 2;
+	_rad += 0.05;
+	count++;
 }
 
 void saw::Init(void)

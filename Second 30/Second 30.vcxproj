@@ -125,10 +125,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ACT_ID.cpp" />
+    <ClCompile Include="Crimp\button.cpp" />
     <ClCompile Include="Crimp\block.cpp" />
     <ClCompile Include="common\ImageMng.cpp" />
     <ClCompile Include="Crimp\saw.cpp" />
     <ClCompile Include="Crimp\gate.cpp" />
+    <ClCompile Include="Scene\GoalScene.cpp" />
     <ClCompile Include="Scene\func\FuncCheckHit.cpp" />
     <ClCompile Include="input\inputState.cpp" />
     <ClCompile Include="input\INPUT_ID.cpp" />
@@ -143,10 +145,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ACT_ID.h" />
+    <ClInclude Include="Crimp\button.h" />
     <ClInclude Include="Crimp\block.h" />
     <ClInclude Include="common\ImageMng.h" />
     <ClInclude Include="Crimp\saw.h" />
     <ClInclude Include="Crimp\gate.h" />
+    <ClInclude Include="Scene\GoalScene.h" />
     <ClInclude Include="Scene\func\FuncCheckHit.h" />
     <ClInclude Include="input\inputState.h" />
     <ClInclude Include="input\INPUT_ID.h" />

@@ -23,10 +23,16 @@ bool FuncCheckHit::operator()(ActQueT & actQue, void * scene)
 					actQue.second.SetAct(ACT_ID::STOP);
 					
 				}
+				if (actQue.second.pos().x + actQue.second.size().x / 2.0 == (*data).pos().x - (*data).size().x / 2.0 ||
+					actQue.second.pos().x - actQue.second.size().x / 2.0 == (*data).pos().x + (*data).size().x / 2.0)
+				{
+					actQue.second.SetMove(false);
+				}
 			}	
 		}
 	}
 
+	// ‹˜‚Ì“–‚½‚è”»’è
 	for (auto data : ((GameScene*)scene)->_objList)
 	{
 		if ((*data).objID() == OBJ_ID::SAW)
@@ -37,7 +43,41 @@ bool FuncCheckHit::operator()(ActQueT & actQue, void * scene)
 				actQue.second.pos().y - actQue.second.size().y / 2.0 <= (*data).pos().y + (*data).size().y / 2.0
 				)
 			{
-				actQue.second.SetAlive(false);
+				actQue.second.SetAlive(STATE::DEATH);
+			}
+		}
+	}
+
+	// ½²¯Á‚Ì“–‚½‚è”»’è
+	for (auto data : ((GameScene*)scene)->_objList)
+	{
+		if ((*data).objID() == OBJ_ID::BUTTON)
+		{
+			if (actQue.second.pos().x - 5.0 <= (*data).pos().x && actQue.second.pos().x + 5.0 >= (*data).pos().x &&
+				actQue.second.pos().y >= (*data).pos().y - (*data).size().y / 2 && actQue.second.pos().y <= (*data).pos().y + (*data).size().y / 2)
+			{
+				(*data).SetAlive(STATE::GOAL);
+
+				for (auto data : ((GameScene*)scene)->_objList)
+				{
+					if ((*data).objID() == OBJ_ID::GATE)
+					{
+						(*data).SetAlive(STATE::GOAL);
+					}
+				}
+			}
+		}
+	}
+
+	// ºÞ°Ù”»’è
+	for (auto data : ((GameScene*)scene)->_objList)
+	{
+		if ((*data).objID() == OBJ_ID::GATE && (*data).state() == STATE::GOAL)
+		{
+			if (actQue.second.pos().x - 5.0 <= (*data).pos().x && actQue.second.pos().x + 5.0 >= (*data).pos().x &&
+				actQue.second.pos().y >= (*data).pos().y - (*data).size().y / 2 && actQue.second.pos().y <= (*data).pos().y + (*data).size().y / 2)
+			{
+				actQue.second.SetAlive(STATE::GOAL);
 			}
 		}
 	}

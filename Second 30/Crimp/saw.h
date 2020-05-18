@@ -3,6 +3,8 @@
 #include <Scene\SceneMng.h>
 #include <Scene\BaseScene.h>
 
+#define P1 3.1415
+
 class saw :
 	public Obj
 {

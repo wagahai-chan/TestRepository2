@@ -14,6 +14,7 @@ player::player(Vector2Dbl pos, Vector2Dbl size)
 {
 	_pos = pos;
 	_size = size;
+	_move = true;
 	_unitID = UNIT_ID::PLAYER;
 	_actID = ACT_ID::FALL;
 	
@@ -40,8 +41,6 @@ void player::Update(void)
 
 	lpSceneMng.AddActQue({ ACT_QUE::CHECK_HIT,*this });
 
-	
-
 	Obj::Draw();
 	return;
 }
@@ -52,22 +51,22 @@ player::~player()
 
 void player::Move(void)
 {
-	// ç∂âEà⁄ìÆêßå‰
-	auto move = [](std::weak_ptr<InputState> keyData, INPUT_ID id, double& pNum, const int speed) {
-		// keyData.expired() èIÇÌÇ¡ÇƒÇ¢ÇÈÇ©Ç¢Ç»Ç¢Ç©
-		if (!keyData.expired())
-		{
-			if ((*keyData.lock()).state(id).first)
-			{
-				pNum += speed;
-			}
-		}
-	};
-
-	move(_input, INPUT_ID::LEFT, _pos.x, -2);
-	move(_input, INPUT_ID::RIGHT, _pos.x, 2);
-	/*move(_input, INPUT_ID::UP, _pos.y, -2);
-	move(_input, INPUT_ID::DOWN, _pos.y, 2);*/
+	
+	if (_input->state(INPUT_ID::RIGHT).first && _move == true)
+	{
+		_pos.x += 2;
+		_turn = false;
+	}
+	if (_input->state(INPUT_ID::LEFT).first && _move == true)
+	{
+		_pos.x -= 2;
+		_turn = true;
+	}
+	/*if (!_input->state(INPUT_ID::RIGHT).first && !_input->state(INPUT_ID::RIGHT).second)
+	{
+		SetAlive(STATE::NORMAL);
+	}
+	SetAlive(STATE::NORMAL);*/
 
 	// óéâ∫
 	if (_actID == ACT_ID::FALL)
@@ -107,13 +106,26 @@ void player::Init(void)
 	data.emplace_back(IMAGE_ID("∑¨◊")[0], 0);
 	SetAnim(STATE::NORMAL, data);
 
+	for (int j = 0; j < 20; j++)
+	{
+		data.emplace_back(IMAGE_ID("∑¨◊run")[j], j * 2 + 2);
+	}	
+	SetAnim(STATE::RUN, data);
+
+	data.emplace_back(IMAGE_ID("∑¨◊")[0], 0);
+	SetAnim(STATE::NORMAL, data);
+
 	data.emplace_back(IMAGE_ID("∑¨◊")[0], 1);
 	data.emplace_back(-1, 2);
 	SetAnim(STATE::DEATH,data);
+
+	data.emplace_back(IMAGE_ID("∑¨◊")[0], 1);
+	data.emplace_back(-1, 2);
+	SetAnim(STATE::GOAL, data);
 
 	_input = std::make_shared<KeyState>();
 
 	
 
-	state(STATE::NORMAL);
+	state(STATE::RUN);
 }

@@ -8,23 +8,28 @@
 
 GameScene::GameScene()
 {
-	lpImageMng.GetID("·¬×", "image/kyara3.png", { 50,50 }, { 1,1 });
+	lpImageMng.GetID("·¬×", "image/kyara2.png", { 50,50 }, { 1,1 });
+	lpImageMng.GetID("·¬×run", "image/kyara6.png", { 50,50 }, { 20,1 });
 	lpImageMng.GetID("ÌÞÛ¯¸", "image/block2.png", { 50,50 }, { 1,1 });
 	lpImageMng.GetID("‹˜", "image/saw.png", { 50,50 }, { 1,1 });
-	lpImageMng.GetID("¹Þ°Ä", "image/gate.png", { 48,80 }, { 1,1 });
+	lpImageMng.GetID("¹Þ°Ä", "image/gate.png", { 48,80 }, { 2,1 });
+	lpImageMng.GetID("½²¯Á", "image/button.png", { 14,50 }, { 2,1 });
 
-	_objList.emplace_back(new gate({ 300.0,435.0 }, { 48,80 }));
+	_objList.emplace_back(new gate({ 725.0,435.0 }, { 48,80 }));
+	_objList.emplace_back(new button({ 250.0,440 + 10.0 }, { 14,50 }));
 
 	_objList.emplace_back(new player({ 150.0,440.0 }, { 50,50 }));
 
-	_objList.emplace_back(new saw({ 400.0,450.0 }, { 50,50 }));
-	_objList.emplace_back(new saw({ 400.0,200.0 }, { 50,50 }));
+	_objList.emplace_back(new saw({ 400.0,475.0 }, { 50,50 }));
 	
 	for (int j = 0; j < 10; j++)
 	{
 		_objList.emplace_back(new block({ 100.0 + 50.0 * j,500.0 }, { 50,50 }));
 	}
+	_objList.emplace_back(new block({ 400.0,400.0 }, { 50,50 }));
 	_objList.emplace_back(new block({ 675.0,500.0 }, { 50,50 }));
+	_objList.emplace_back(new block({ 725.0,500.0 }, { 50,50 }));
+	_objList.emplace_back(new block({ 100.0,450.0 }, { 50,50 }));
 }
 
 
@@ -43,9 +48,12 @@ unique_Base GameScene::Update(unique_Base own)
 
 	for (auto data : _objList)
 	{
-		if (CheckHitKey(KEY_INPUT_SPACE))
+		if ((*data).unitID() == UNIT_ID::PLAYER)
 		{
-			(*data).SetAlive(false);
+			if ((*data).state() == STATE::GOAL)
+			{
+				return std::make_unique<GoalScene>();
+			}
 		}
 	}
 
