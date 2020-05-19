@@ -7,7 +7,9 @@ class BaseScene;		// ﾌﾟﾛﾄﾀｲﾌﾟ宣言
 enum class ACT_QUE
 {
 	NON,
-	CHECK_HIT,
+	CHECK_HIT,		// ﾌﾞﾛｯｸ等の動かないｵﾌﾞｼﾞｪｸﾄとの当たり判定
+	CHECK_DEATH,	// 当たるとゲームオーバーになる判定
+	CHECK_MOVE,		// 当たると何かしらの動きがある判定
 	MAX
 };
 

@@ -30,6 +30,8 @@ enum class OBJ_ID	// 障害物ｵﾌﾞｼﾞｪｸﾄ
 	SAW,		// 鋸
 	GATE,		// ｺﾞｰﾙの門
 	BUTTON,		// ｺﾞｰﾙを開くﾎﾞﾀﾝ
+	DRUM,		// ﾄﾞﾗﾑ缶　ものを燃やすのに使用
+	TREE,		// 木
 	MAX
 };
 
@@ -60,7 +62,9 @@ public:
 	bool SetAnim(const STATE state, AnimVector& data);
 	virtual void SetAlive(STATE stateID);
 	virtual void SetAct(ACT_ID id);
-	virtual bool SetMove(bool move);
+	virtual bool SetRMove(bool move);
+	virtual bool SetLMove(bool move);
+	virtual bool SetMove(int i, bool move);
 	STATE isAlive(void) { return _alive; }
 	bool isDead(void) { return _dead; }
 	bool isAnimEnd(void);	// ｱﾆﾒｰｼｮﾝが終了しているか
@@ -78,7 +82,9 @@ protected:
 	STATE _alive;		// 生きているか
 	bool _dead;			// 死んでいるか
 	bool hitFlag;		// 当たり判定
-	bool _move;			// 動けるか
+	bool _rMove;		// 動けるか
+	bool _lMove;
+	bool _move[4];		// (0 上) (1 下) (2 左) (3 右)
 
 	UNIT_ID _unitID;
 	ACT_ID _actID;

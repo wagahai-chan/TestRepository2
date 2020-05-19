@@ -5,9 +5,11 @@
 
 SceneMng*  SceneMng::sInstance = nullptr;
 
-SceneMng::SceneMng() :ScreenSize{ 800,600 } // ｺﾝｽﾄﾗｸﾀが走った瞬間、ﾛｯｸがかかる。
+SceneMng::SceneMng() :ScreenSize{ 800,600 }, ScreenCenter{ScreenSize / 2} // ｺﾝｽﾄﾗｸﾀが走った瞬間、ﾛｯｸがかかる。
 {
-	
+	PX = 0.0;
+	Pos[0] = 400.0;
+	Pos[1] = 1200.0;
 }
 
 void SceneMng::Draw(void)
@@ -23,7 +25,7 @@ void SceneMng::Draw(void)
 		std::tie(id, x, y, rad,turn) = dQue;
 
 		DrawRotaGraph(
-			static_cast<int>(x),
+			static_cast<int>(x) + (PX),
 			static_cast<int>(y),
 			1.0,
 			rad,
@@ -50,7 +52,7 @@ void SceneMng::Run(void)
 	{
 		_drawList.clear();	// 前ﾌﾚｰﾑの描画する画像を削除する
 
-		AddDrawQue({ IMAGE_ID("背景")[0],400.0,300.0,0,false });
+		
 		_activeScene = (*_activeScene).Update(std::move(_activeScene));	// moveを使うことでコピーを作らずに所有権の譲渡ができる
 		// スマートポインタとしてわかりやすいのが上　_activeScene->Update();
 		(*_activeScene).RunActQue(std::move(_actList));

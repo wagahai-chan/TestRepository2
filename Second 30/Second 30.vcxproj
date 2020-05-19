@@ -130,6 +130,9 @@
     <ClCompile Include="common\ImageMng.cpp" />
     <ClCompile Include="Crimp\saw.cpp" />
     <ClCompile Include="Crimp\gate.cpp" />
+    <ClCompile Include="Crimp\drum.cpp" />
+    <ClCompile Include="Scene\func\FuncCheckDeath.cpp" />
+    <ClCompile Include="Scene\func\FuncCheckMove.cpp" />
     <ClCompile Include="Scene\GoalScene.cpp" />
     <ClCompile Include="Scene\func\FuncCheckHit.cpp" />
     <ClCompile Include="input\inputState.cpp" />
@@ -142,6 +145,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Scene\SceneMng.cpp" />
     <ClCompile Include="Scene\TitleScene.cpp" />
+    <ClCompile Include="Crimp\tree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ACT_ID.h" />
@@ -150,6 +154,9 @@
     <ClInclude Include="common\ImageMng.h" />
     <ClInclude Include="Crimp\saw.h" />
     <ClInclude Include="Crimp\gate.h" />
+    <ClInclude Include="Crimp\drum.h" />
+    <ClInclude Include="Scene\func\FuncCheckDeath.h" />
+    <ClInclude Include="Scene\func\FuncCheckMove.h" />
     <ClInclude Include="Scene\GoalScene.h" />
     <ClInclude Include="Scene\func\FuncCheckHit.h" />
     <ClInclude Include="input\inputState.h" />
@@ -161,6 +168,7 @@
     <ClInclude Include="Scene\BaseScene.h" />
     <ClInclude Include="Scene\SceneMng.h" />
     <ClInclude Include="Scene\TitleScene.h" />
+    <ClInclude Include="Crimp\tree.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

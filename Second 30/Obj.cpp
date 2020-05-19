@@ -117,18 +117,6 @@ bool Obj::SetAnim(const STATE state, AnimVector & data)
 void Obj::SetAlive(STATE stateID)
 {
 	_alive = stateID;
-	//if (_alive == STATE::DEATH)
-	//{
-	//	state(STATE::DEATH);
-	//}
-	//else if (_alive == STATE::GOAL)
-	//{
-	//	state(STATE::GOAL);
-	//}
-	//else
-	//{
-	//	// –³‚µ
-	//}
 
 	switch (stateID)
 	{
@@ -158,9 +146,23 @@ void Obj::SetAct(ACT_ID id)
 	return;
 }
 
-bool Obj::SetMove(bool move)
+bool Obj::SetRMove(bool move)
 {
-	_move = move;
+	_rMove = move;
+
+	return false;
+}
+
+bool Obj::SetLMove(bool move)
+{
+	_lMove = move;
+
+	return false;
+}
+
+bool Obj::SetMove(int i, bool move)
+{
+	_move[i] = move;
 
 	return false;
 }

@@ -3,6 +3,8 @@
 #include <_debug\_DebugConOut.h>
 #include "GameScene.h"
 #include <Scene/func/FuncCheckHit.h>
+#include <Scene/func/FuncCheckDeath.h>
+#include <Scene/func/FuncCheckMove.h>
 
 
 
@@ -14,13 +16,19 @@ GameScene::GameScene()
 	lpImageMng.GetID("‹˜", "image/saw.png", { 50,50 }, { 1,1 });
 	lpImageMng.GetID("¹Þ°Ä", "image/gate.png", { 48,80 }, { 2,1 });
 	lpImageMng.GetID("½²¯Á", "image/button.png", { 14,50 }, { 2,1 });
+	lpImageMng.GetID("ÄÞ×Ñ", "image/drum.png", { 40,50 }, { 1,1 });
+	lpImageMng.GetID("–Ø", "image/tree.png", { 250,300 }, { 1,1 });
 
-	_objList.emplace_back(new gate({ 725.0,435.0 }, { 48,80 }));
-	_objList.emplace_back(new button({ 250.0,440 + 10.0 }, { 14,50 }));
+	/*_objList.emplace_back(new gate({ 725.0,435.0 }, { 48,80 }));
+	_objList.emplace_back(new button({ 675.0,440 + 10.0 }, { 14,50 }));*/
 
-	_objList.emplace_back(new player({ 150.0,440.0 }, { 50,50 }));
+	/*_objList.emplace_back(new player({ 150.0,440.0 }, { 50,50 }));*/
+	_objList.emplace_back(new player({ 150.0,300.0 }, { 50,50 }));
 
-	_objList.emplace_back(new saw({ 400.0,475.0 }, { 50,50 }));
+	//_objList.emplace_back(new drum({ 200.0,450.0 }, { 40,50 }));
+	//_objList.emplace_back(new tree({ 300.0,325.0 }, { 250,300 }));
+
+	/*_objList.emplace_back(new saw({ 400.0,475.0 }, { 50,50 }));
 	
 	for (int j = 0; j < 10; j++)
 	{
@@ -29,7 +37,8 @@ GameScene::GameScene()
 	_objList.emplace_back(new block({ 400.0,400.0 }, { 50,50 }));
 	_objList.emplace_back(new block({ 675.0,500.0 }, { 50,50 }));
 	_objList.emplace_back(new block({ 725.0,500.0 }, { 50,50 }));
-	_objList.emplace_back(new block({ 100.0,450.0 }, { 50,50 }));
+	_objList.emplace_back(new block({ 100.0,450.0 }, { 50,50 }));*/
+	_objList.emplace_back(new block({ 150.0,500.0 }, { 50,50 }));
 }
 
 
@@ -39,6 +48,8 @@ GameScene::~GameScene()
 
 unique_Base GameScene::Update(unique_Base own)
 {
+	lpSceneMng.AddDrawQue({ IMAGE_ID("”wŒi")[0],lpSceneMng.Pos[0],lpSceneMng.ScreenCenter.y,0,false });
+	lpSceneMng.AddDrawQue({ IMAGE_ID("”wŒi")[0],lpSceneMng.Pos[1],lpSceneMng.ScreenCenter.y,0,false });
 
 	for (auto data : _objList)
 	{
@@ -76,6 +87,12 @@ void GameScene::RunActQue(std::vector<ActQueT> actList)
 		{
 		case ACT_QUE::CHECK_HIT:
 			FuncCheckHit()(actQue, this);
+			break;
+		case ACT_QUE::CHECK_DEATH:
+			FuncCheckDeath()(actQue, this);
+			break;
+		case ACT_QUE::CHECK_MOVE:
+			FuncCheckMove()(actQue, this);
 			break;
 		default:
 			AST();

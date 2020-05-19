@@ -58,7 +58,8 @@ public:
 	const Vector2 ScreenSize;
 	const Vector2 ScreenCenter;			// ½¸Ø°İ‚Ì’†S
 
-	int pulas = 0.0;
+	double PX;		// ÌßÚ²Ô°‚Æ‰æ–Ê’†‰›‚Æ‚Ì·•ª
+	double Pos[2];
 
 private:
 	static SceneMng* sInstance;

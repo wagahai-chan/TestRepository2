@@ -15,6 +15,7 @@ public:
 	void Update(void) override;
 	~player();
 	void Move(void);
+	void Screen(void);
 
 	bool flag = false;
 	int count;

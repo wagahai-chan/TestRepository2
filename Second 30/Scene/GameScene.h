@@ -6,10 +6,14 @@
 #include <Crimp/saw.h>
 #include<Crimp/gate.h>
 #include <Crimp/button.h>
+#include <Crimp/drum.h>
+#include <Crimp/tree.h>
 #include <Scene\SceneMng.h>
 #include <Scene/GoalScene.h>
 
 struct FuncCheckHit;
+struct FuncCheckDeath;
+struct FuncCheckMove;
 
 class GameScene :
 	public BaseScene
@@ -20,6 +24,8 @@ public:
 	unique_Base Update(unique_Base own);
 private:
 	friend FuncCheckHit;
+	friend FuncCheckDeath;
+	friend FuncCheckMove;
 	std::vector<sharedObj> _objList;
 	void RunActQue(std::vector<ActQueT> actList)  override;
 };

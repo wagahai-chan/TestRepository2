@@ -1,3 +1,2 @@
 ﻿  FuncCheckHit.cpp
-c:\users\ryusei\desktop\new課題\second 30\scene\scenemng.h(61): warning C4244: '初期化中': 'double' から 'int' への変換です。データが失われる可能性があります。
   Second 30.vcxproj -> C:\Users\Ryusei\Desktop\new課題\Second 30\Debug\Second 30.exe
