@@ -5,8 +5,7 @@
 
 player::player()
 {
-	_unitID = UNIT_ID::PLAYER;
-	_actID = ACT_ID::FALL;
+	_crimpID = CRIMP_ID::MOVEOBJECT;
 	Init();
 }
 
@@ -19,10 +18,8 @@ player::player(Vector2Dbl pos, Vector2Dbl size)
 
 	_pos = pos;
 	_size = size;
-	_rMove = true;
-	_lMove = true;
+	_crimpID = CRIMP_ID::MOVEOBJECT;
 	_unitID = UNIT_ID::PLAYER;
-	_actID = ACT_ID::FALL;
 
 	Init();
 }
@@ -30,6 +27,11 @@ player::player(Vector2Dbl pos, Vector2Dbl size)
 
 void player::Update(void)
 {
+	if (CheckHitKey(KEY_INPUT_SPACE))
+	{
+		SetAlive(STATE::DEATH);
+	}
+
 	if (DestroyProc())
 	{
 		return;
@@ -40,6 +42,11 @@ void player::Update(void)
 	
 	Screen();
 	Move();
+
+	for (int j = 0; j < static_cast<int>(MOVE_ID::MAX); j++)
+	{
+		lpSceneMng.check[static_cast<int>(UNIT_ID::PLAYER)][j] = false;
+	}
 
 	lpSceneMng.AddActQue({ ACT_QUE::CHECK_DEATH,*this });
 	lpSceneMng.AddActQue({ ACT_QUE::CHECK_HIT,*this });		// ÌÞÛ¯¸“™‚Ì“®‚©‚È‚¢µÌÞ¼Þª¸Ä‚Æ‚Ì“–‚½‚è”»’è
@@ -56,19 +63,28 @@ player::~player()
 void player::Move(void)
 {
 	
-	if (_input->state(INPUT_ID::RIGHT).first && !_move[3])
+	if (_input->state(INPUT_ID::RIGHT).first && !_move[static_cast<int>(MOVE_ID::RIGHT)])
 	{
 		_pos.x += 2;
 		_turn = false;
 	}
-	if (_input->state(INPUT_ID::LEFT).first && !_move[2])
+	if (_input->state(INPUT_ID::LEFT).first && !_move[static_cast<int>(MOVE_ID::LEFT)])
 	{
 		_pos.x -= 2;
 		_turn = true;
 	}
 
+	if (_input->state(INPUT_ID::RIGHT).first || _input->state(INPUT_ID::LEFT).first)
+	{
+		SetAlive(STATE::RUN);
+	}
+	else
+	{
+		SetAlive(STATE::NORMAL);
+	}
+
 	// —Ž‰º
-	if (_actID == ACT_ID::FALL && !_move[1])
+	if (!_move[static_cast<int>(MOVE_ID::DOWN)] && !flag)
 	{
 		_pos.y += 10.0;
 	}
@@ -77,12 +93,11 @@ void player::Move(void)
 	// ¼Þ¬ÝÌß§Œä
 	if (_input->state(INPUT_ID::LEFTBUTTON).first && !_input->state(INPUT_ID::LEFTBUTTON).second && !flag /*&& _actID == ACT_ID::STOP*/)
 	{
-		_actID = ACT_ID::JUMP;
 		flag = true;
 		count = 0;
 	}
 
-	if (flag && _actID == ACT_ID::JUMP && !_move[0])
+	if (flag && !_move[static_cast<int>(MOVE_ID::UP)])
 	{
 		if (count < 15)
 		{
@@ -91,14 +106,12 @@ void player::Move(void)
 		else
 		{
 			flag = false;
-			_actID = ACT_ID::FALL;
 		}
 		
 		count++;
 	}
-	else if (_move[0])
+	else if (_move[static_cast<int>(MOVE_ID::UP)])
 	{
-		_actID = ACT_ID::FALL;
 		flag = false;
 	}
 }
@@ -133,15 +146,16 @@ void player::Init(void)
 	for (int j = 0; j < 20; j++)
 	{
 		data.emplace_back(IMAGE_ID("·¬×run")[j], j * 2 + 2);
-	}	
-	SetAnim(STATE::RUN, data);
+	}
+	data.emplace_back(-1, 42);
+	SetAnim(STATE::DEATH, data);
 
 	data.emplace_back(IMAGE_ID("·¬×")[0], 0);
 	SetAnim(STATE::NORMAL, data);
 
-	data.emplace_back(IMAGE_ID("·¬×")[0], 1);
+	/*data.emplace_back(IMAGE_ID("·¬×")[0], 1);
 	data.emplace_back(-1, 2);
-	SetAnim(STATE::DEATH,data);
+	SetAnim(STATE::DEATH,data);*/
 
 	data.emplace_back(IMAGE_ID("·¬×")[0], 1);
 	data.emplace_back(-1, 2);
@@ -151,5 +165,5 @@ void player::Init(void)
 
 	
 
-	state(STATE::RUN);
+	state(STATE::NORMAL);
 }

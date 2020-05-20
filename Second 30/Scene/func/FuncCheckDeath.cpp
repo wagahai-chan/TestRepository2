@@ -6,7 +6,7 @@
 
 bool FuncCheckDeath::operator()(ActQueT & actQue, void * scene)
 {
-	UNIT_ID unitID = (actQue.second.unitID() == UNIT_ID::PLAYER ? UNIT_ID::PLAYER : UNIT_ID::CRIMP);
+	CRIMP_ID crimpID = (actQue.second.crimpID() == CRIMP_ID::MOVEOBJECT ? CRIMP_ID::MOVEOBJECT : CRIMP_ID::CRIMP);
 
 	// ‹˜‚Ì“–‚½‚è”»’è
 	for (auto data : ((GameScene*)scene)->_objList)

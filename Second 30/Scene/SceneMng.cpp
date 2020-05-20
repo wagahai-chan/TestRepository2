@@ -10,6 +10,15 @@ SceneMng::SceneMng() :ScreenSize{ 800,600 }, ScreenCenter{ScreenSize / 2} // ºÝ½
 	PX = 0.0;
 	Pos[0] = 400.0;
 	Pos[1] = 1200.0;
+
+	for (int x = 0; x < static_cast<int>(UNIT_ID::MAX); x++)
+	{
+		for (int j = 0; j < static_cast<int>(MOVE_ID::MAX); j++)
+		{
+			check[x][j] = false;
+		}
+	}
+	
 }
 
 void SceneMng::Draw(void)

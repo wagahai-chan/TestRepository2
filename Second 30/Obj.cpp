@@ -12,7 +12,7 @@ Obj::Obj()
 	_animCount = 0;
 	_rad = 0.0;
 	_turn = false;
-	_unitID = UNIT_ID::NON;
+	_crimpID = CRIMP_ID::NON;
 }
 
 void Obj::Draw(void)
@@ -69,7 +69,7 @@ bool Obj::state(const STATE state)
 		_animCount = 0;
 	}
 
-	_state = state;
+ 	_state = state;
 	return true;
 }
 
@@ -86,6 +86,11 @@ const Vector2Dbl & Obj::pos(void) const
 const Vector2Dbl & Obj::size(void) const
 {
 	return _size;
+}
+
+const CRIMP_ID & Obj::crimpID() const
+{
+	return _crimpID;
 }
 
 const UNIT_ID & Obj::unitID() const
@@ -120,6 +125,9 @@ void Obj::SetAlive(STATE stateID)
 
 	switch (stateID)
 	{
+	case STATE::NORMAL:
+		state(STATE::NORMAL);
+		break;
 	case STATE::DEATH:
 		state(STATE::DEATH);
 		break;
@@ -146,18 +154,11 @@ void Obj::SetAct(ACT_ID id)
 	return;
 }
 
-bool Obj::SetRMove(bool move)
+void Obj::SetPos(Vector2Dbl pos)
 {
-	_rMove = move;
+	_pos = pos;
 
-	return false;
-}
-
-bool Obj::SetLMove(bool move)
-{
-	_lMove = move;
-
-	return false;
+	return;
 }
 
 bool Obj::SetMove(int i, bool move)

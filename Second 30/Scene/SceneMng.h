@@ -60,6 +60,7 @@ public:
 
 	double PX;		// ÌßÚ²Ô°‚Æ‰æ–Ê’†‰›‚Æ‚Ì·•ª
 	double Pos[2];
+	bool check[static_cast<int>(UNIT_ID::MAX)][4];		// ‚Ç‚ê‚©ˆê‚Â‚Å‚à‚ ‚½‚Á‚Ä‚¢‚ê‚Îtrue‚É‚µ‚Ä“®‚«‚ğ~‚ß‚é
 
 private:
 	static SceneMng* sInstance;

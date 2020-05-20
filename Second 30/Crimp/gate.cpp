@@ -10,7 +10,7 @@ gate::gate(Vector2Dbl pos, Vector2Dbl size)
 {
 	_pos = pos;
 	_size = size;
-	_unitID = UNIT_ID::CRIMP;
+	_crimpID = CRIMP_ID::CRIMP;
 	_objID = OBJ_ID::GATE;
 
 	Init();

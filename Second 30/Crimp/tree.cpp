@@ -10,7 +10,7 @@ tree::tree(Vector2Dbl pos, Vector2Dbl size)
 {
 	_pos = pos;
 	_size = size;
-	_unitID = UNIT_ID::CRIMP;
+	_crimpID = CRIMP_ID::CRIMP;
 	_objID = OBJ_ID::TREE;
 
 	Init();
@@ -39,6 +39,10 @@ void tree::Init(void)
 
 	data.emplace_back(IMAGE_ID("–Ø")[0], 0);
 	SetAnim(STATE::NORMAL, data);
+
+	/*data.emplace_back(IMAGE_ID("–Ø")[0], 10);*/
+	data.emplace_back(-1, 20);
+	SetAnim(STATE::DEATH, data);
 
 	state(STATE::NORMAL);
 }

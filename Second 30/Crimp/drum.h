@@ -1,6 +1,7 @@
 #pragma once
 #include "Obj.h"
 #include <Scene\SceneMng.h>
+#include <Scene/GameScene.h>
 #include <Scene\BaseScene.h>
 
 class drum :
@@ -13,5 +14,6 @@ public:
 	void Update(void) override;
 private:
 	void Init(void);
+	bool flag = false;
 };
 

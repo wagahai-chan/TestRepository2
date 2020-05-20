@@ -16,11 +16,18 @@ enum class STATE
 	MAX
 };
 
-enum class UNIT_ID
+enum class CRIMP_ID
 {
 	NON,
-	PLAYER,		// 自ｷｬﾗ
+	MOVEOBJECT,		// 自ｷｬﾗ
 	CRIMP,		// 障害物
+	MAX
+};
+
+enum class UNIT_ID
+{
+	PLAYER,
+	DRUM,
 	MAX
 };
 
@@ -32,6 +39,15 @@ enum class OBJ_ID	// 障害物ｵﾌﾞｼﾞｪｸﾄ
 	BUTTON,		// ｺﾞｰﾙを開くﾎﾞﾀﾝ
 	DRUM,		// ﾄﾞﾗﾑ缶　ものを燃やすのに使用
 	TREE,		// 木
+	MAX
+};
+
+enum class MOVE_ID
+{
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT,
 	MAX
 };
 
@@ -54,6 +70,7 @@ public:
 
 	const Vector2Dbl& pos(void) const;
 	const Vector2Dbl& size(void) const;
+	const CRIMP_ID& crimpID() const;
 	const UNIT_ID& unitID() const;
 	const ACT_ID& actID() const;
 	const OBJ_ID& objID() const;
@@ -62,8 +79,7 @@ public:
 	bool SetAnim(const STATE state, AnimVector& data);
 	virtual void SetAlive(STATE stateID);
 	virtual void SetAct(ACT_ID id);
-	virtual bool SetRMove(bool move);
-	virtual bool SetLMove(bool move);
+	virtual void SetPos(Vector2Dbl pos);
 	virtual bool SetMove(int i, bool move);
 	STATE isAlive(void) { return _alive; }
 	bool isDead(void) { return _dead; }
@@ -82,10 +98,9 @@ protected:
 	STATE _alive;		// 生きているか
 	bool _dead;			// 死んでいるか
 	bool hitFlag;		// 当たり判定
-	bool _rMove;		// 動けるか
-	bool _lMove;
-	bool _move[4];		// (0 上) (1 下) (2 左) (3 右)
+	bool _move[4];		// (0 上) (1 左) (2 右) (3 右)
 
+	CRIMP_ID _crimpID;
 	UNIT_ID _unitID;
 	ACT_ID _actID;
 	OBJ_ID _objID;
