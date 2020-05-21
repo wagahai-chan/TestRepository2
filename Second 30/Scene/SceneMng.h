@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include <tuple> 
+#include <_debug/_DebugConOut.h>
 #include <common\Vector2.h>
 #include <Scene\BaseScene.h>
 #include <Scene/TitleScene.h>
@@ -61,6 +62,8 @@ public:
 	double PX;		// ÌßÚ²Ô°‚Æ‰æ–Ê’†‰›‚Æ‚Ì·•ª
 	double Pos[2];
 	bool check[static_cast<int>(UNIT_ID::MAX)][4];		// ‚Ç‚ê‚©ˆê‚Â‚Å‚à‚ ‚½‚Á‚Ä‚¢‚ê‚Îtrue‚É‚µ‚Ä“®‚«‚ğ~‚ß‚é
+	
+	bool makeFlag = false;	// true:MakeScene  false:GameScene
 
 private:
 	static SceneMng* sInstance;

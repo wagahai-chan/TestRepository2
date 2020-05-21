@@ -32,9 +32,11 @@ void player::Update(void)
 		SetAlive(STATE::DEATH);
 	}
 
+	Obj::Draw();
+
 	if (DestroyProc())
 	{
-		return;
+		//return;
 	}
 
 	_input->Update();
@@ -52,7 +54,6 @@ void player::Update(void)
 	lpSceneMng.AddActQue({ ACT_QUE::CHECK_HIT,*this });		// ÌÞÛ¯¸“™‚Ì“®‚©‚È‚¢µÌÞ¼Þª¸Ä‚Æ‚Ì“–‚½‚è”»’è
 	lpSceneMng.AddActQue({ ACT_QUE::CHECK_MOVE,*this });
 
-	Obj::Draw();
 	return;
 }
 
@@ -80,7 +81,7 @@ void player::Move(void)
 	}
 	else
 	{
-		SetAlive(STATE::NORMAL);
+		//SetAlive(STATE::NORMAL);
 	}
 
 	// —Ž‰º
@@ -140,18 +141,15 @@ void player::Init(void)
 {
 	AnimVector data;
 
-	data.emplace_back(IMAGE_ID("·¬×")[0], 0);
-	SetAnim(STATE::NORMAL, data);
+	/*data.emplace_back(IMAGE_ID("·¬×")[0], 0);
+	SetAnim(STATE::NORMAL, data);*/
 
 	for (int j = 0; j < 20; j++)
 	{
 		data.emplace_back(IMAGE_ID("·¬×run")[j], j * 2 + 2);
 	}
-	data.emplace_back(-1, 42);
-	SetAnim(STATE::DEATH, data);
-
-	data.emplace_back(IMAGE_ID("·¬×")[0], 0);
-	SetAnim(STATE::NORMAL, data);
+	//data.emplace_back(-1, 42);
+	SetAnim(STATE::RUN, data);
 
 	/*data.emplace_back(IMAGE_ID("·¬×")[0], 1);
 	data.emplace_back(-1, 2);
@@ -161,9 +159,16 @@ void player::Init(void)
 	data.emplace_back(-1, 2);
 	SetAnim(STATE::GOAL, data);
 
+	data.emplace_back(IMAGE_ID("PL”š”­")[0], 20);
+	data.emplace_back(IMAGE_ID("PL”š”­")[1], 25);
+	data.emplace_back(IMAGE_ID("PL”š”­")[2], 30);
+	data.emplace_back(IMAGE_ID("PL”š”­")[3], 35);
+	data.emplace_back(-1, 40);
+	SetAnim(STATE::NORMAL, data);
+
 	_input = std::make_shared<KeyState>();
 
 	
 
-	state(STATE::NORMAL);
+	state(STATE::RUN);
 }

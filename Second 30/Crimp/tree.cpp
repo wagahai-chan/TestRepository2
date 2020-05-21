@@ -23,12 +23,13 @@ tree::~tree()
 
 void tree::Update(void)
 {
+
+	Obj::Draw();
+
 	if (DestroyProc())
 	{
 		return;
 	}
-
-	Obj::Draw();
 
 	return;
 }
@@ -40,7 +41,7 @@ void tree::Init(void)
 	data.emplace_back(IMAGE_ID("–Ø")[0], 0);
 	SetAnim(STATE::NORMAL, data);
 
-	/*data.emplace_back(IMAGE_ID("–Ø")[0], 10);*/
+	data.emplace_back(IMAGE_ID("–Ø")[0], 10);
 	data.emplace_back(-1, 20);
 	SetAnim(STATE::DEATH, data);
 

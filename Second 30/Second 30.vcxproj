@@ -131,6 +131,8 @@
     <ClCompile Include="Crimp\saw.cpp" />
     <ClCompile Include="Crimp\gate.cpp" />
     <ClCompile Include="Crimp\drum.cpp" />
+    <ClCompile Include="cursor.cpp" />
+    <ClCompile Include="Scene\MakeScene.cpp" />
     <ClCompile Include="Scene\func\FuncCheckDeath.cpp" />
     <ClCompile Include="Scene\func\FuncCheckMove.cpp" />
     <ClCompile Include="Scene\GoalScene.cpp" />
@@ -155,6 +157,8 @@
     <ClInclude Include="Crimp\saw.h" />
     <ClInclude Include="Crimp\gate.h" />
     <ClInclude Include="Crimp\drum.h" />
+    <ClInclude Include="cursor.h" />
+    <ClInclude Include="Scene\MakeScene.h" />
     <ClInclude Include="Scene\func\FuncCheckDeath.h" />
     <ClInclude Include="Scene\func\FuncCheckMove.h" />
     <ClInclude Include="Scene\GoalScene.h" />

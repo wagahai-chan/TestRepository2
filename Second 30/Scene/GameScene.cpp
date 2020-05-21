@@ -17,7 +17,9 @@ GameScene::GameScene()
 	lpImageMng.GetID("¹Þ°Ä", "image/gate.png", { 48,80 }, { 2,1 });
 	lpImageMng.GetID("½²¯Á", "image/button.png", { 14,50 }, { 2,1 });
 	lpImageMng.GetID("ÄÞ×Ñ", "image/drum.png", { 50,50 }, { 1,1 });
+	lpImageMng.GetID("ÄÞ×Ñ2", "image/drum2.png", { 50,50 }, { 1,1 });
 	lpImageMng.GetID("–Ø", "image/tree2.png", { 300,300 }, { 1,1 });
+	lpImageMng.GetID("PL”š”­", "image/pl_blast.png", { 64,64 }, { 4,1 });
 
 	/*_objList.emplace_back(new gate({ 725.0,435.0 }, { 48,80 }));
 	_objList.emplace_back(new button({ 675.0,440 + 10.0 }, { 14,50 }));*/
@@ -41,7 +43,9 @@ GameScene::GameScene()
 	_objList.emplace_back(new block({ 100.0,400.0 }, { 50,50 }));
 	_objList.emplace_back(new block({ 100.0,350.0 }, { 50,50 }));
 	_objList.emplace_back(new block({ 100.0,300.0 }, { 50,50 }));
-	//_objList.emplace_back(new block({ 200.0,450.0 }, { 50,50 }));
+	_objList.emplace_back(new block({ 200.0,450.0 }, { 50,50 }));
+
+	lpSceneMng.makeFlag = false;
 }
 
 

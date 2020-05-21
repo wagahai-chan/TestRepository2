@@ -1,3 +1,4 @@
+#include <DxLib.h>
 #include "drum.h"
 
 
@@ -24,6 +25,13 @@ drum::~drum()
 
 void drum::Update(void)
 {
+	/*if (CheckHitKey(KEY_INPUT_SPACE))
+	{
+		SetAlive(STATE::RUN);
+	}*/
+
+	Obj::Draw();
+
 	if (DestroyProc())
 	{
 		return;
@@ -51,7 +59,7 @@ void drum::Update(void)
 	lpSceneMng.AddActQue({ ACT_QUE::CHECK_HIT,*this });		// ÌÞÛ¯¸“™‚Ì“®‚©‚È‚¢µÌÞ¼Þª¸Ä‚Æ‚Ì“–‚½‚è”»’è
 	lpSceneMng.AddActQue({ ACT_QUE::CHECK_MOVE,*this });
 
-	Obj::Draw();
+	/*Obj::Draw();*/
 
 	return;
 }
@@ -63,8 +71,8 @@ void drum::Init(void)
 	data.emplace_back(IMAGE_ID("ÄÞ×Ñ")[0], 0);
 	SetAnim(STATE::NORMAL, data);
 
-	/*data.emplace_back(IMAGE_ID("ÄÞ×Ñ")[0], -1);*/
-	data.emplace_back(-1, 10);
+	data.emplace_back(IMAGE_ID("ÄÞ×Ñ")[0], 10);
+	data.emplace_back(-1, 20);
 	SetAnim(STATE::DEATH, data);
 
 	state(STATE::NORMAL);

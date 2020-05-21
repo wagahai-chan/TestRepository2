@@ -1,11 +1,12 @@
 #include <DxLib.h>
 #include "SceneMng.h"
 #include <Scene/GameScene.h>
+#include <Scene/MakeScene.h>
 
 
 SceneMng*  SceneMng::sInstance = nullptr;
 
-SceneMng::SceneMng() :ScreenSize{ 800,600 }, ScreenCenter{ScreenSize / 2} // ºİ½Ä×¸À‚ª‘–‚Á‚½uŠÔAÛ¯¸‚ª‚©‚©‚éB
+SceneMng::SceneMng() :ScreenSize{ 1000,750 }, ScreenCenter{ScreenSize / 2} // ºİ½Ä×¸À‚ª‘–‚Á‚½uŠÔAÛ¯¸‚ª‚©‚©‚éB
 {
 	PX = 0.0;
 	Pos[0] = 400.0;
@@ -18,9 +19,7 @@ SceneMng::SceneMng() :ScreenSize{ 800,600 }, ScreenCenter{ScreenSize / 2} // ºİ½
 			check[x][j] = false;
 		}
 	}
-	
 }
-
 void SceneMng::Draw(void)
 {
 	ClsDrawScreen();
@@ -42,6 +41,7 @@ void SceneMng::Draw(void)
 			true,
 			turn);
 	}
+	
 
 	ScreenFlip();
 }
@@ -54,7 +54,7 @@ SceneMng::~SceneMng()
 void SceneMng::Run(void)
 {
 	SysInit();
-	_activeScene = std::make_unique<GameScene>();
+	_activeScene = std::make_unique<MakeScene>();
 
 
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
@@ -104,6 +104,10 @@ bool SceneMng::SysInit(void)
 
 	lpImageMng.GetID("”wŒi", "image/haikei.png");
 	lpImageMng.GetID("À²ÄÙ", "image/title.png");
+	lpImageMng.GetID("white", "image/white.png");
+	lpImageMng.GetID("c", "image/line.png");
+	lpImageMng.GetID("‰¡", "image/line2.png");
 
 	return false;
 }
+
