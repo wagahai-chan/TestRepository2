@@ -10,7 +10,7 @@
 
 GameScene::GameScene()
 {
-	lpImageMng.GetID("·¬×", "image/kyara2.png", { 50,50 }, { 1,1 });
+	/*lpImageMng.GetID("·¬×", "image/kyara2.png", { 50,50 }, { 1,1 });
 	lpImageMng.GetID("·¬×run", "image/kyara6.png", { 50,50 }, { 20,1 });
 	lpImageMng.GetID("ÌÞÛ¯¸", "image/block2.png", { 50,50 }, { 1,1 });
 	lpImageMng.GetID("‹˜", "image/saw.png", { 50,50 }, { 1,1 });
@@ -20,30 +20,30 @@ GameScene::GameScene()
 	lpImageMng.GetID("ÄÞ×Ñ2", "image/drum2.png", { 50,50 }, { 1,1 });
 	lpImageMng.GetID("–Ø", "image/tree2.png", { 300,300 }, { 1,1 });
 	lpImageMng.GetID("PL”š”­", "image/pl_blast.png", { 64,64 }, { 4,1 });
-
-	/*_objList.emplace_back(new gate({ 725.0,435.0 }, { 48,80 }));
-	_objList.emplace_back(new button({ 675.0,440 + 10.0 }, { 14,50 }));*/
+*/
+	_objList.emplace_back(new gate({ 725.0,435.0 }, { 48,80 }));
+	_objList.emplace_back(new button({ 300.0,440 + 10.0 }, { 14,50 }));
 
 	/*_objList.emplace_back(new player({ 150.0,440.0 }, { 50,50 }));*/
 	_objList.emplace_back(new player({ 200.0,300.0 }, { 34,50 }));
 
-	_objList.emplace_back(new drum({ 300.0,400.0 }, { 38,50 }));
-	_objList.emplace_back(new tree({ 500.0,325.0 }, { 50,300 }));
+	/*_objList.emplace_back(new drum({ 300.0,400.0 }, { 38,50 }));
+	_objList.emplace_back(new tree({ 500.0,325.0 }, { 50,300 }));*/
 
-	//_objList.emplace_back(new saw({ 400.0,475.0 }, { 50,50 }));
+	_objList.emplace_back(new saw({ 400.0,475.0 }, { 50,50 }));
 	
 	for (int j = 0; j < 10; j++)
 	{
 		_objList.emplace_back(new block({ 100.0 + 50.0 * j,500.0 }, { 50,50 }));
 	}
-	//_objList.emplace_back(new block({ 400.0,350.0 }, { 50,50 }));
+	_objList.emplace_back(new block({ 400.0,400.0 }, { 50,50 }));
 	_objList.emplace_back(new block({ 675.0,500.0 }, { 50,50 }));
 	_objList.emplace_back(new block({ 725.0,500.0 }, { 50,50 }));
-	_objList.emplace_back(new block({ 100.0,450.0 }, { 50,50 }));
+	/*_objList.emplace_back(new block({ 100.0,450.0 }, { 50,50 }));
 	_objList.emplace_back(new block({ 100.0,400.0 }, { 50,50 }));
 	_objList.emplace_back(new block({ 100.0,350.0 }, { 50,50 }));
 	_objList.emplace_back(new block({ 100.0,300.0 }, { 50,50 }));
-	_objList.emplace_back(new block({ 200.0,450.0 }, { 50,50 }));
+	_objList.emplace_back(new block({ 200.0,450.0 }, { 50,50 }));*/
 
 	lpSceneMng.makeFlag = false;
 }

@@ -8,8 +8,25 @@ cursor::cursor()
 
 cursor::cursor(Vector2Dbl pos, Vector2Dbl size)
 {
-	_pos = pos;
+	_cPos = pos;
+	_chip.x = static_cast<int>(_cPos.x) / 50.0 - 1.0;
+	_chip.y = static_cast<int>(_cPos.y) / 50.0 - 1.0;
+	_pos.x = (50.0 *_chip.x) + 25;
+	_pos.y = (50.0 *_chip.y) + 25;
 	_size = size;
+
+	for (int y = 0; y < 12; y++)
+	{
+		for (int x = 0; x < 20; x++)
+		{
+			_map[y][x] = 0;
+		}
+	}
+
+	_name = IMAGE_ID("ÌÞÛ¯¸")[0];
+	obj = OBJ_ID::BLOCK;
+	_unitID = UNIT_ID::CURSOR;
+	_objID = OBJ_ID::NON;
 
 	Init();
 }
@@ -20,6 +37,20 @@ void cursor::Update(void)
 	_input->Update();
 
 	Move();
+	change();
+
+	lpSceneMng.AddDrawQue({ _name,_pos.x,_pos.y,0,false });
+
+	if (!_input->state(INPUT_ID::RIGHTBUTTON).first && _input->state(INPUT_ID::RIGHTBUTTON).second && _map[_chip.y][_chip.x] == 0)
+	{
+		_map[_chip.y][_chip.x] = static_cast<int>(obj);
+		lpSceneMng.AddMakeQue({ obj,*this });
+	}
+	if (_input->state(INPUT_ID::LEFTBUTTON).first && !_input->state(INPUT_ID::LEFTBUTTON).second && _map[_chip.y][_chip.x] != 0)
+	{
+		_map[_chip.y][_chip.x] = 0;
+		lpSceneMng.AddDeleteQue({ obj,*this });
+	}
 
 	Obj::Draw();
 }
@@ -41,10 +72,29 @@ void cursor::Move(void)
 		}
 	};
 
-	move(_input, INPUT_ID::LEFT, _pos.x, -4);
-	move(_input, INPUT_ID::RIGHT, _pos.x, 4);
-	move(_input, INPUT_ID::UP, _pos.y, -4);
-	move(_input, INPUT_ID::DOWN, _pos.y, 4);
+	move(_input, INPUT_ID::LEFT, _cPos.x, -10);
+	move(_input, INPUT_ID::RIGHT, _cPos.x, 10);
+	move(_input, INPUT_ID::UP, _cPos.y, -10);
+	move(_input, INPUT_ID::DOWN, _cPos.y, 10);
+
+	_chip.x = static_cast<int>(_cPos.x) / 50 - 1;
+	_chip.y = static_cast<int>(_cPos.y) / 50 - 1;
+	_pos.x = (50.0 *_chip.x) + 25;
+	_pos.y = (50.0 *_chip.y) + 25;
+}
+
+void cursor::change(void)
+{
+	if (_input->state(INPUT_ID::R1).first && !_input->state(INPUT_ID::R1).second)
+	{
+		_name = IMAGE_ID("ÄÞ×Ñ")[0];
+		obj = OBJ_ID::DRUM;
+	}
+	if (_input->state(INPUT_ID::L1).first && !_input->state(INPUT_ID::L1).second)
+	{
+		_name = IMAGE_ID("ÌÞÛ¯¸")[0];
+		obj = OBJ_ID::BLOCK;
+	}
 }
 
 void cursor::Init(void)

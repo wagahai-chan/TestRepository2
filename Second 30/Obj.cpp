@@ -200,6 +200,13 @@ bool Obj::HitFlag(bool flag)
 	return true;
 }
 
+bool Obj::End(void)
+{
+	_dead = true;
+
+	return true;
+}
+
 bool Obj::DestroyProc(void)
 {
 	if (_alive != STATE::DEATH)

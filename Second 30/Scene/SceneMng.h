@@ -55,6 +55,8 @@ public:
 	void Run(void);
 	bool AddDrawQue(DrawQueT dQue);
 	bool AddActQue(ActQueT aQue);
+	bool AddMakeQue(MakeQueT mQue);
+	bool AddDeleteQue(DeleteQueT dQue);
 
 	const Vector2 ScreenSize;
 	const Vector2 ScreenCenter;			// Ω∏ÿ∞›ÇÃíÜêS
@@ -73,7 +75,9 @@ private:
 	void Draw(void);
 
 	std::vector<DrawQueT> _drawList;
-	std::vector<ActQueT> _actList;
+	std::vector<ActQueT>  _actList;
+	std::vector<MakeQueT> _makeList;
+	std::vector<DeleteQueT> _deleteList;
 
 	~SceneMng();
 	SceneMng();

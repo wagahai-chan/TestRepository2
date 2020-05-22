@@ -65,6 +65,8 @@ void SceneMng::Run(void)
 		_activeScene = (*_activeScene).Update(std::move(_activeScene));	// moveを使うことでコピーを作らずに所有権の譲渡ができる
 		// スマートポインタとしてわかりやすいのが上　_activeScene->Update();
 		(*_activeScene).RunActQue(std::move(_actList));
+		(*_activeScene).RunMakeQue(std::move(_makeList));
+		(*_activeScene).RunDeleteQue(std::move(_deleteList));
 
 		Draw();
 	}
@@ -89,6 +91,20 @@ bool SceneMng::AddActQue(ActQueT aQue)
 	return true;
 }
 
+bool SceneMng::AddMakeQue(MakeQueT mQue)
+{
+	_makeList.emplace_back(mQue);
+
+	return true;
+}
+
+bool SceneMng::AddDeleteQue(DeleteQueT dQue)
+{
+	_deleteList.emplace_back(dQue);
+
+	return true;
+}
+
 bool SceneMng::SysInit(void)
 {
 	//ｼｽﾃﾑ処理
@@ -107,6 +123,18 @@ bool SceneMng::SysInit(void)
 	lpImageMng.GetID("white", "image/white.png");
 	lpImageMng.GetID("縦", "image/line.png");
 	lpImageMng.GetID("横", "image/line2.png");
+
+	lpImageMng.GetID("ｷｬﾗ", "image/kyara2.png", { 50,50 }, { 1,1 });
+	lpImageMng.GetID("ｷｬﾗrun", "image/kyara6.png", { 50,50 }, { 20,1 });
+	lpImageMng.GetID("ﾌﾞﾛｯｸ", "image/block2.png", { 50,50 }, { 1,1 });
+	lpImageMng.GetID("鋸", "image/saw.png", { 50,50 }, { 1,1 });
+	lpImageMng.GetID("ｹﾞｰﾄ", "image/gate.png", { 48,80 }, { 2,1 });
+	lpImageMng.GetID("ｽｲｯﾁ", "image/button.png", { 14,50 }, { 2,1 });
+	lpImageMng.GetID("ﾄﾞﾗﾑ", "image/drum.png", { 50,50 }, { 1,1 });
+	lpImageMng.GetID("ﾄﾞﾗﾑ2", "image/drum2.png", { 50,50 }, { 1,1 });
+	lpImageMng.GetID("木", "image/tree2.png", { 300,300 }, { 1,1 });
+	lpImageMng.GetID("PL爆発", "image/pl_blast.png", { 64,64 }, { 4,1 });
+
 
 	return false;
 }

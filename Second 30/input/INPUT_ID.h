@@ -10,6 +10,14 @@ enum class INPUT_ID  // ﾏｯﾌﾟのｷｰ  既定の型を指定できる
 	RIGHTBUTTON,	// 右ボタン
 	UPBUTTON,		// 上ボタン
 	DOWNBUTTON,		// 下ボタン
+	L1,
+	R1,
+	L2,
+	R2,
+	L3,
+	R3,
+	SELECT,
+	START,
 	MAX
 };
 

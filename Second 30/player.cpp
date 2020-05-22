@@ -27,32 +27,29 @@ player::player(Vector2Dbl pos, Vector2Dbl size)
 
 void player::Update(void)
 {
-	if (CheckHitKey(KEY_INPUT_SPACE))
-	{
-		SetAlive(STATE::DEATH);
-	}
-
 	Obj::Draw();
 
 	if (DestroyProc())
 	{
-		//return;
+		return;
 	}
 
-	_input->Update();
-
-	
-	Screen();
-	Move();
-
-	for (int j = 0; j < static_cast<int>(MOVE_ID::MAX); j++)
+	if (!lpSceneMng.makeFlag)
 	{
-		lpSceneMng.check[static_cast<int>(UNIT_ID::PLAYER)][j] = false;
-	}
+		_input->Update();
 
-	lpSceneMng.AddActQue({ ACT_QUE::CHECK_DEATH,*this });
-	lpSceneMng.AddActQue({ ACT_QUE::CHECK_HIT,*this });		// ÌÞÛ¯¸“™‚Ì“®‚©‚È‚¢µÌÞ¼Þª¸Ä‚Æ‚Ì“–‚½‚è”»’è
-	lpSceneMng.AddActQue({ ACT_QUE::CHECK_MOVE,*this });
+		Screen();
+		Move();
+
+		for (int j = 0; j < static_cast<int>(MOVE_ID::MAX); j++)
+		{
+			lpSceneMng.check[static_cast<int>(UNIT_ID::PLAYER)][j] = false;
+		}
+
+		lpSceneMng.AddActQue({ ACT_QUE::CHECK_DEATH,*this });
+		lpSceneMng.AddActQue({ ACT_QUE::CHECK_HIT,*this });		// ÌÞÛ¯¸“™‚Ì“®‚©‚È‚¢µÌÞ¼Þª¸Ä‚Æ‚Ì“–‚½‚è”»’è
+		lpSceneMng.AddActQue({ ACT_QUE::CHECK_MOVE,*this });
+	}
 
 	return;
 }

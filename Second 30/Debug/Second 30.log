@@ -1,2 +1,18 @@
 ﻿  MakeScene.cpp
+c:\users\ryusei\desktop\new課題\second 30\scene\makescene.h(9): warning C4099: 'MakeScene': タイプ名は最初 'struct' として使われていましたが 'class' として使われています。
+  c:\users\ryusei\desktop\new課題\second 30\scene\makescene.h(9): note: 'MakeScene' の宣言を確認してください
+  cursor.cpp
+c:\users\ryusei\desktop\new課題\second 30\cursor.h(11): warning C4099: 'MakeScene': タイプ名は最初 'class' として使われていましたが 'struct' として使われています。
+  c:\users\ryusei\desktop\new課題\second 30\scene\makescene.h(9): note: 'MakeScene' の宣言を確認してください
+c:\users\ryusei\desktop\new課題\second 30\cursor.cpp(12): warning C4244: '=': 'double' から 'T' への変換です。データが失われる可能性があります。
+          with
+          [
+              T=int
+          ]
+c:\users\ryusei\desktop\new課題\second 30\cursor.cpp(13): warning C4244: '=': 'double' から 'T' への変換です。データが失われる可能性があります。
+          with
+          [
+              T=int
+          ]
+  コードを生成中...
   Second 30.vcxproj -> C:\Users\Ryusei\Desktop\new課題\Second 30\Debug\Second 30.exe

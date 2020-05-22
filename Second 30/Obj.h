@@ -4,6 +4,7 @@
 #include <map>
 #include <common\Vector2.h>
 #include <ACT_ID.h>
+#include <OBJ_ID.h>
 
 enum class STATE
 {
@@ -26,21 +27,13 @@ enum class CRIMP_ID
 
 enum class UNIT_ID
 {
+	CURSOR,
 	PLAYER,
 	DRUM,
 	MAX
 };
 
-enum class OBJ_ID	// 障害物ｵﾌﾞｼﾞｪｸﾄ
-{
-	BLOCK,		// ﾌﾞﾛｯｸ
-	SAW,		// 鋸
-	GATE,		// ｺﾞｰﾙの門
-	BUTTON,		// ｺﾞｰﾙを開くﾎﾞﾀﾝ
-	DRUM,		// ﾄﾞﾗﾑ缶　ものを燃やすのに使用
-	TREE,		// 木
-	MAX
-};
+
 
 enum class MOVE_ID
 {
@@ -85,6 +78,7 @@ public:
 	bool isDead(void) { return _dead; }
 	bool isAnimEnd(void);	// ｱﾆﾒｰｼｮﾝが終了しているか
 	bool HitFlag(bool flag);		// ｵﾌﾞｼﾞｪｸﾄに当たったか
+	bool End(void);
 
 private:
 	std::map<STATE, AnimVector> _animMap;

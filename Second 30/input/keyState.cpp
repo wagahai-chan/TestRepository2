@@ -16,6 +16,14 @@ KeyState::KeyState()
 	_KeyConDef.emplace_back(PAD_INPUT_4);
 	_KeyConDef.emplace_back(PAD_INPUT_2);
 	_KeyConDef.emplace_back(PAD_INPUT_3);
+	_KeyConDef.emplace_back(PAD_INPUT_5);
+	_KeyConDef.emplace_back(PAD_INPUT_6);
+	_KeyConDef.emplace_back(PAD_INPUT_7);
+	_KeyConDef.emplace_back(PAD_INPUT_8);
+	_KeyConDef.emplace_back(PAD_INPUT_9);
+	_KeyConDef.emplace_back(PAD_INPUT_10);
+	_KeyConDef.emplace_back(PAD_INPUT_11);
+	_KeyConDef.emplace_back(PAD_INPUT_12);
 
 	FILE *file;
 	fopen_s(&file, "data/key.data", "rb");
