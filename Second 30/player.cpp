@@ -20,6 +20,7 @@ player::player(Vector2Dbl pos, Vector2Dbl size)
 	_size = size;
 	_crimpID = CRIMP_ID::MOVEOBJECT;
 	_unitID = UNIT_ID::PLAYER;
+	_objID = OBJ_ID::PLAYER;
 
 	Init();
 }
@@ -78,7 +79,7 @@ void player::Move(void)
 	}
 	else
 	{
-		//SetAlive(STATE::NORMAL);
+		SetAlive(STATE::NORMAL);
 	}
 
 	// —Ž‰º
@@ -138,34 +139,33 @@ void player::Init(void)
 {
 	AnimVector data;
 
-	/*data.emplace_back(IMAGE_ID("·¬×")[0], 0);
-	SetAnim(STATE::NORMAL, data);*/
+	data.emplace_back(IMAGE_ID("·¬×")[0], 0);
+	SetAnim(STATE::NORMAL, data);
 
 	for (int j = 0; j < 20; j++)
 	{
 		data.emplace_back(IMAGE_ID("·¬×run")[j], j * 2 + 2);
 	}
-	//data.emplace_back(-1, 42);
 	SetAnim(STATE::RUN, data);
 
-	/*data.emplace_back(IMAGE_ID("·¬×")[0], 1);
+	data.emplace_back(IMAGE_ID("·¬×")[0], 1);
 	data.emplace_back(-1, 2);
-	SetAnim(STATE::DEATH,data);*/
+	SetAnim(STATE::DEATH,data);
 
 	data.emplace_back(IMAGE_ID("·¬×")[0], 1);
 	data.emplace_back(-1, 2);
 	SetAnim(STATE::GOAL, data);
 
-	data.emplace_back(IMAGE_ID("PL”š”­")[0], 20);
+	/*data.emplace_back(IMAGE_ID("PL”š”­")[0], 20);
 	data.emplace_back(IMAGE_ID("PL”š”­")[1], 25);
 	data.emplace_back(IMAGE_ID("PL”š”­")[2], 30);
 	data.emplace_back(IMAGE_ID("PL”š”­")[3], 35);
 	data.emplace_back(-1, 40);
-	SetAnim(STATE::NORMAL, data);
+	SetAnim(STATE::NORMAL, data);*/
 
 	_input = std::make_shared<KeyState>();
 
 	
 
-	state(STATE::RUN);
+	state(STATE::NORMAL);
 }

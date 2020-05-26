@@ -4,12 +4,19 @@ enum class OBJ_ID	// 障害物ｵﾌﾞｼﾞｪｸﾄ
 {
 	NON,		// 何もなし
 	BLOCK,		// ﾌﾞﾛｯｸ
+	PLAYER,
 	SAW,		// 鋸
 	GATE,		// ｺﾞｰﾙの門
 	BUTTON,		// ｺﾞｰﾙを開くﾎﾞﾀﾝ
 	DRUM,		// ﾄﾞﾗﾑ缶　ものを燃やすのに使用
 	TREE,		// 木
 	MAX
+};
+
+enum class GAME_ID
+{
+	MAKE,
+	PLAY
 };
 
 OBJ_ID begin(OBJ_ID);

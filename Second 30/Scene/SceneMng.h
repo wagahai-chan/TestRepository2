@@ -67,6 +67,8 @@ public:
 	
 	bool makeFlag = false;	// true:MakeScene  false:GameScene
 
+	std::list<sharedObj> _saveList;
+
 private:
 	static SceneMng* sInstance;
 

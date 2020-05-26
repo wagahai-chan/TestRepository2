@@ -31,7 +31,10 @@ void saw::Update(void)
 		return;
 	}
 
-	Move();
+	if (!lpSceneMng.makeFlag)
+	{
+		Move();
+	}
 
 	Obj::Draw();
 

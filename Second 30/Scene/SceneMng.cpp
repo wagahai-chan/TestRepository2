@@ -54,7 +54,7 @@ SceneMng::~SceneMng()
 void SceneMng::Run(void)
 {
 	SysInit();
-	_activeScene = std::make_unique<MakeScene>();
+	_activeScene = std::make_unique<GameScene>();
 
 
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
@@ -120,6 +120,7 @@ bool SceneMng::SysInit(void)
 
 	lpImageMng.GetID("îwåi", "image/haikei.png");
 	lpImageMng.GetID("¿≤ƒŸ", "image/title.png");
+	lpImageMng.GetID("æ⁄∏ƒ", "image/select.png");
 	lpImageMng.GetID("white", "image/white.png");
 	lpImageMng.GetID("èc", "image/line.png");
 	lpImageMng.GetID("â°", "image/line2.png");

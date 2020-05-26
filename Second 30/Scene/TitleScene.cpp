@@ -1,7 +1,7 @@
 #include <memory>
 #include <DxLib.h>
 #include "TitleScene.h"
-#include "GameScene.h"
+#include "SelectScene.h"
 #include "SceneMng.h"
 
 
@@ -21,7 +21,7 @@ unique_Base TitleScene::Update(unique_Base own)
 
 	if (GetJoypadInputState(DX_INPUT_PAD1) & PAD_INPUT_4)
 	{
-		return std::make_unique<GameScene>();
+		return std::make_unique<SelectScene>();
 	}
 
 	return std::move(own);

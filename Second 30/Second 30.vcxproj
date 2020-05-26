@@ -149,6 +149,7 @@
     <ClCompile Include="Scene\SceneMng.cpp" />
     <ClCompile Include="Scene\TitleScene.cpp" />
     <ClCompile Include="Crimp\tree.cpp" />
+    <ClCompile Include="Scene\SelectScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ACT_ID.h" />
@@ -175,6 +176,7 @@
     <ClInclude Include="Scene\SceneMng.h" />
     <ClInclude Include="Scene\TitleScene.h" />
     <ClInclude Include="Crimp\tree.h" />
+    <ClInclude Include="Scene\SelectScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

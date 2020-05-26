@@ -20,6 +20,10 @@ public:
 	~cursor();
 	void Move(void);
 	void change(void);
+	void Gap(void);
+	void Insert(void);
+	void Removal(void);
+	bool Check(void);
 private:
 	friend MakeScene;
 	void Init(void);
@@ -27,7 +31,9 @@ private:
 	Vector2    _chip;	// ”z—ñ”Ô†
 	Vector2Dbl _cPos;	// ÀÛ‚Ì¶°¿Ù‚ÌÀ•W
 	int _map[12][20];
-	int _name;
-	OBJ_ID obj;
+	int name[static_cast<int>(OBJ_ID::MAX)];
+	int num = 0;
+	OBJ_ID obj[static_cast<int>(OBJ_ID::MAX)];
+	Vector2Dbl gap;	// µÌŞ¼Şª¸Ä‚Ìy²‚Ì½ŞÚ•â³
 };
 

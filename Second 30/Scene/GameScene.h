@@ -1,5 +1,8 @@
 #pragma once
 #include <Scene\BaseScene.h>
+#include <iostream>
+#include <list>
+#include <algorithm>
 #include <common\ImageMng.h>
 #include <player.h>
 #include <Crimp/block.h>

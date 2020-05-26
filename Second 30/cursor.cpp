@@ -14,6 +14,8 @@ cursor::cursor(Vector2Dbl pos, Vector2Dbl size)
 	_pos.x = (50.0 *_chip.x) + 25;
 	_pos.y = (50.0 *_chip.y) + 25;
 	_size = size;
+	gap.x = 0.0;
+	gap.y = 0.0;
 
 	for (int y = 0; y < 12; y++)
 	{
@@ -23,8 +25,24 @@ cursor::cursor(Vector2Dbl pos, Vector2Dbl size)
 		}
 	}
 
-	_name = IMAGE_ID("ÌÞÛ¯¸")[0];
-	obj = OBJ_ID::BLOCK;
+	name[1] = IMAGE_ID("ÌÞÛ¯¸")[0];
+	name[2] = IMAGE_ID("·¬×")[0];
+	name[3] = IMAGE_ID("‹˜")[0];
+	name[4] = IMAGE_ID("¹Þ°Ä")[0];
+	name[5] = IMAGE_ID("½²¯Á")[0];
+	name[6] = IMAGE_ID("ÄÞ×Ñ")[0];
+	name[7] = IMAGE_ID("–Ø")[0];
+
+	obj[1] = OBJ_ID::BLOCK;
+	obj[2] = OBJ_ID::PLAYER;
+	obj[3] = OBJ_ID::SAW;
+	obj[4] = OBJ_ID::GATE;
+	obj[5] = OBJ_ID::BUTTON;
+	obj[6] = OBJ_ID::DRUM;
+	obj[7] = OBJ_ID::TREE;
+
+	num = 1;
+
 	_unitID = UNIT_ID::CURSOR;
 	_objID = OBJ_ID::NON;
 
@@ -38,18 +56,19 @@ void cursor::Update(void)
 
 	Move();
 	change();
+	Gap();
 
-	lpSceneMng.AddDrawQue({ _name,_pos.x,_pos.y,0,false });
+	lpSceneMng.AddDrawQue({ name[num],_pos.x + gap.x,_pos.y + gap.y,0,false });
 
-	if (!_input->state(INPUT_ID::RIGHTBUTTON).first && _input->state(INPUT_ID::RIGHTBUTTON).second && _map[_chip.y][_chip.x] == 0)
+	if (!_input->state(INPUT_ID::RIGHTBUTTON).first && _input->state(INPUT_ID::RIGHTBUTTON).second && !Check())
 	{
-		_map[_chip.y][_chip.x] = static_cast<int>(obj);
-		lpSceneMng.AddMakeQue({ obj,*this });
+		Insert();
+		lpSceneMng.AddMakeQue({ obj[num],*this });
 	}
-	if (_input->state(INPUT_ID::LEFTBUTTON).first && !_input->state(INPUT_ID::LEFTBUTTON).second && _map[_chip.y][_chip.x] != 0)
+	if (_input->state(INPUT_ID::LEFTBUTTON).first && !_input->state(INPUT_ID::LEFTBUTTON).second && Check())
 	{
-		_map[_chip.y][_chip.x] = 0;
-		lpSceneMng.AddDeleteQue({ obj,*this });
+		Removal();
+		lpSceneMng.AddDeleteQue({ obj[num],*this });
 	}
 
 	Obj::Draw();
@@ -85,16 +104,125 @@ void cursor::Move(void)
 
 void cursor::change(void)
 {
-	if (_input->state(INPUT_ID::R1).first && !_input->state(INPUT_ID::R1).second)
+	if (_input->state(INPUT_ID::R1).first && !_input->state(INPUT_ID::R1).second && num + 1 < static_cast<int>(OBJ_ID::MAX))
 	{
-		_name = IMAGE_ID("ÄÞ×Ñ")[0];
-		obj = OBJ_ID::DRUM;
+		num++;
 	}
-	if (_input->state(INPUT_ID::L1).first && !_input->state(INPUT_ID::L1).second)
+	if (_input->state(INPUT_ID::L1).first && !_input->state(INPUT_ID::L1).second && num > 1)
 	{
-		_name = IMAGE_ID("ÌÞÛ¯¸")[0];
-		obj = OBJ_ID::BLOCK;
+		num--;
 	}
+}
+
+void cursor::Gap(void)
+{
+	switch (obj[num])
+	{
+	case OBJ_ID::GATE:
+		gap.x = 0.0;
+		gap.y = -15.0;
+		break;
+	case OBJ_ID::TREE:
+		gap.x = 0.0;
+		gap.y = -25.0;
+		break;
+	default:
+		gap.x = 0.0;
+		gap.y = 0.0;
+		break;
+	}
+}
+
+void cursor::Insert(void)
+{
+	switch (obj[num])
+	{
+	case OBJ_ID::GATE:
+		_map[_chip.y - 1][_chip.x] = static_cast<int>(obj[num]);
+		_map[_chip.y][_chip.x] = static_cast<int>(obj[num]);
+		break;
+	case OBJ_ID::TREE:
+		_map[_chip.y][_chip.x] = static_cast<int>(obj[num]);
+		_map[_chip.y + 1][_chip.x] = static_cast<int>(obj[num]);
+		_map[_chip.y + 2][_chip.x] = static_cast<int>(obj[num]);
+		_map[_chip.y + 2][_chip.x + 1] = static_cast<int>(obj[num]);
+		_map[_chip.y + 2][_chip.x + 1] = static_cast<int>(obj[num]);
+		break;
+	default:
+		_map[_chip.y][_chip.x] = static_cast<int>(obj[num]);
+		break;
+	}
+}
+
+void cursor::Removal(void)
+{
+	switch (obj[num])
+	{
+	case OBJ_ID::GATE:
+		_map[_chip.y][_chip.x] = 0;
+		_map[_chip.y - 1][_chip.x] = 0;	
+		break;
+	case OBJ_ID::TREE:
+		_map[_chip.y][_chip.x] = 0;
+		_map[_chip.y + 1][_chip.x] = 0;
+		_map[_chip.y + 2][_chip.x] = 0;
+		_map[_chip.y + 2][_chip.x + 1] = 0;
+		_map[_chip.y + 2][_chip.x + 1] = 0;
+		break;
+	default:
+		_map[_chip.y][_chip.x] = 0;
+		break;
+	}
+}
+
+bool cursor::Check(void)
+{
+	if (_map[_chip.y][_chip.x] != 0)
+	{
+		if (_map[_chip.y][_chip.x] == static_cast<int>(OBJ_ID::GATE))
+		{
+			if (_map[_chip.y - 1][_chip.x] == static_cast<int>(OBJ_ID::GATE))
+			{
+				return true;
+			}
+			return false;
+		}
+		if (_map[_chip.y][_chip.x] == static_cast<int>(OBJ_ID::TREE))
+		{
+			if (_map[_chip.y + 1][_chip.x] == static_cast<int>(OBJ_ID::TREE)     &&
+				_map[_chip.y + 2][_chip.x] == static_cast<int>(OBJ_ID::TREE)     &&
+				_map[_chip.y + 2][_chip.x + 1] == static_cast<int>(OBJ_ID::TREE) &&
+				_map[_chip.y + 2][_chip.x + 1] == static_cast<int>(OBJ_ID::TREE))
+			{
+				return true;
+			}
+			return false;
+		}
+
+		return true;
+	}
+
+	if (obj[num] == OBJ_ID::GATE)
+	{
+		if (_map[_chip.y - 1][_chip.x] == 0)
+		{
+			return false;
+		}
+		return true;
+	}
+	if (obj[num] == OBJ_ID::TREE)
+	{
+		if (_map[_chip.y + 1][_chip.x] == 0 &&
+			_map[_chip.y + 2][_chip.x] == 0 &&
+			_map[_chip.y + 2][_chip.x + 1] == 0 &&
+			_map[_chip.y + 2][_chip.x + 1] == 0)
+		{
+			return false;
+		}
+		return true;
+	}
+
+	return false;
 }
 
 void cursor::Init(void)
