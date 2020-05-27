@@ -3,6 +3,7 @@
 #include <iostream>
 #include <list>
 #include <algorithm>
+#include <vector>
 #include <common\ImageMng.h>
 #include <cursor.h>
 #include <Scene\SceneMng.h>
@@ -23,7 +24,7 @@ public:
 	unique_Base Update(unique_Base own);
 	void Move(void);
 private:
-	std::vector<sharedObj> _objList;
+	//std::vector<sharedObj> _objList;
 	void RunMakeQue(std::vector<MakeQueT> makeList)  override;
 	void RunDeleteQue(std::vector<DeleteQueT> deleteList) override;
 	void draw(void);	

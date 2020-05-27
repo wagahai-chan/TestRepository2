@@ -1,2 +1,6 @@
 ﻿  GameScene.cpp
+  MakeScene.cpp
+c:\users\ryusei\desktop\new課題\second 30\scene\makescene.h(18): warning C4099: 'MakeScene': タイプ名は最初 'struct' として使われていましたが 'class' として使われています。
+  c:\users\ryusei\desktop\new課題\second 30\scene\makescene.h(18): note: 'MakeScene' の宣言を確認してください
+  コードを生成中...
   Second 30.vcxproj -> C:\Users\Ryusei\Desktop\new課題\Second 30\Debug\Second 30.exe

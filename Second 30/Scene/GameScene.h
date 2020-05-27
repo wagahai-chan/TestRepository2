@@ -3,6 +3,7 @@
 #include <iostream>
 #include <list>
 #include <algorithm>
+#include <vector>
 #include <common\ImageMng.h>
 #include <player.h>
 #include <Crimp/block.h>

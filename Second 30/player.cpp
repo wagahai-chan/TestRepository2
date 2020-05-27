@@ -16,6 +16,8 @@ player::player(Vector2Dbl pos, Vector2Dbl size)
 		_move[j] = false;
 	}
 
+	_move[static_cast<int>(MOVE_ID::DOWN)] = true;
+
 	_pos = pos;
 	_size = size;
 	_crimpID = CRIMP_ID::MOVEOBJECT;
@@ -153,7 +155,6 @@ void player::Init(void)
 	SetAnim(STATE::DEATH,data);
 
 	data.emplace_back(IMAGE_ID("·¬×")[0], 1);
-	data.emplace_back(-1, 2);
 	SetAnim(STATE::GOAL, data);
 
 	/*data.emplace_back(IMAGE_ID("PL”š”­")[0], 20);

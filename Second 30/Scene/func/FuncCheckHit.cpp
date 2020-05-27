@@ -13,7 +13,7 @@ bool FuncCheckHit::operator()(ActQueT & actQue, void * scene)
 	for (auto data : ((GameScene*)scene)->_objList)
 	{
 		if (((*data).unitID() != unitID || (*data).crimpID() != crimpID) &&
-			((*data).objID() == OBJ_ID::BLOCK || (*data).objID() == OBJ_ID::TREE || (*data).objID() == OBJ_ID::DRUM))
+			((*data).objID() == OBJ_ID::BLOCK || (*data).objID() == OBJ_ID::TREE || (*data).objID() == OBJ_ID::DRUM || (*data).objID() == OBJ_ID::PLAYER))
 		{
 			// ÌßÚ²Ô°¶ˆÚ“®
 			if (actQue.second.pos().y + actQue.second.size().y / 2.0 > (*data).pos().y - (*data).size().y / 2.0 &&

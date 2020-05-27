@@ -15,6 +15,13 @@ drum::drum(Vector2Dbl pos, Vector2Dbl size)
 	_objID = OBJ_ID::DRUM;
 	_unitID = UNIT_ID::DRUM;
 
+	/*for (int j = 0; j < 4; j++)
+	{
+		_move[j] = false;
+	}*/
+
+	//_move[static_cast<int>(MOVE_ID::DOWN)] = true;
+
 	Init();
 }
 
