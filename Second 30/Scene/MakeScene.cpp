@@ -57,23 +57,23 @@ void MakeScene::Move(void)
 	}
 	//std::copy(_objList.begin(), _objList.end(), std::back_inserter(lpSceneMng._saveList));
 
-	/*for (auto data : _objList)
+	for (auto list : lpSceneMng._saveList)
 	{
-		(*data).End();
-	}*/
-	FILE* file;
-	fopen_s(&file, "data/map.data", "wb");
-	if (file != nullptr)
-	{
-		fwrite(
-			lpSceneMng._saveList.data(), // —v‘f‚ÌÎß²ÝÀ°‚ðŽæ“¾‚µ‚Ä‚»‚ê‚ð“n‚· 
-			sizeof(lpSceneMng._saveList[0]),
-			lpSceneMng._saveList.size(),
-			file
-		);
-		fclose(file);
+		FILE* file;
+		fopen_s(&file, "data/map.data", "wb");
+		if (file != nullptr)
+		{
+			fwrite(
+				(&list), // —v‘f‚ÌÎß²ÝÀ°‚ðŽæ“¾‚µ‚Ä‚»‚ê‚ð“n‚· 
+				sizeof(lpSceneMng._saveList[0]),
+				lpSceneMng._saveList.size(),
+				file
+			);
+			fclose(file);
+		}
 	}
-
+	
+	//File();
 
 	auto itr = std::remove_if(
 		lpSceneMng._saveList.begin(),	// Áª¯¸”ÍˆÍ‚ÌŠJŽn
@@ -170,5 +170,21 @@ void MakeScene::draw(void)
 
 	lpSceneMng.AddDrawQue({ IMAGE_ID("ÌÞÛ¯¸")[0],100.0,675.0,0,false });
 	lpSceneMng.AddDrawQue({ IMAGE_ID("ÄÞ×Ñ")[0],150.0,675.0,0,false });
+}
+
+void MakeScene::File(void)
+{
+	FILE* file;
+	fopen_s(&file, "data/map.data", "wb");
+	if (file != nullptr)
+	{
+		fwrite(
+			lpSceneMng._saveList.data(), // —v‘f‚ÌÎß²ÝÀ°‚ðŽæ“¾‚µ‚Ä‚»‚ê‚ð“n‚· 
+			sizeof(lpSceneMng._saveList[0]),
+			lpSceneMng._saveList.size(),
+			file
+		);
+		fclose(file);
+	}
 }
 

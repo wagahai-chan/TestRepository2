@@ -28,5 +28,6 @@ private:
 	void RunMakeQue(std::vector<MakeQueT> makeList)  override;
 	void RunDeleteQue(std::vector<DeleteQueT> deleteList) override;
 	void draw(void);	
+	void File(void);
 };
 

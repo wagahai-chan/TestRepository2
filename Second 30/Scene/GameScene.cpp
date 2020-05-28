@@ -18,8 +18,8 @@ GameScene::GameScene()
 	}
 	else
 	{
-		//_keyConには値が入っていないから要素(INPUT_ID分)のサイズを確保しないといけない
-		_objList.resize(lpSceneMng._saveList.end()));
+		//_objListには値が入っていないから要素(INPUT_ID分)のサイズを確保しないといけない
+		//_objList.resize(lpSceneMng._saveList.end());
 		fread(
 			_objList.data(),
 			sizeof(_objList[0]),
