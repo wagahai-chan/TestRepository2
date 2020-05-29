@@ -10,7 +10,9 @@ Obj::Obj()
 	hitFlag = false;
 	_animFrame = 0;
 	_animCount = 0;
+	_rate = 1.0;
 	_rad = 0.0;
+	_layer = LAYER::OBJ;
 	_turn = false;
 	_crimpID = CRIMP_ID::NON;
 }
@@ -43,13 +45,13 @@ void Obj::Draw(void)
 			_animCount = 0;
 		}
 
-		lpSceneMng.AddDrawQue({ _animMap[_state][_animFrame].first,_pos.x,_pos.y,_rad ,_turn});
+		lpSceneMng.AddDrawQue({ _animMap[_state][_animFrame].first,_pos.x,_pos.y,_rate,_rad ,_layer,_turn});
 	}
 }
 
 void Obj::Draw(int id)
 {
-	lpSceneMng.AddDrawQue({ id,_pos.x,_pos.y,_rad ,_turn});
+	lpSceneMng.AddDrawQue({ id,_pos.x,_pos.y,_rate,_rad ,_layer,_turn});
 }
 
 Obj::~Obj()

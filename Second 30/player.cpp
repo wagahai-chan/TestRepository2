@@ -23,6 +23,7 @@ player::player(Vector2Dbl pos, Vector2Dbl size)
 	_crimpID = CRIMP_ID::MOVEOBJECT;
 	_unitID = UNIT_ID::PLAYER;
 	_objID = OBJ_ID::PLAYER;
+	_layer = LAYER::CHAR;
 
 	Init();
 }
@@ -68,11 +69,19 @@ void player::Move(void)
 	{
 		_pos.x += 2;
 		_turn = false;
+		if (_pos.x >= lpSceneMng.ScreenCenter.x)
+		{
+			lpSceneMng.Pos[2] = lpSceneMng.Pos[2] + 2;
+		}
 	}
 	if (_input->state(INPUT_ID::LEFT).first && !_move[static_cast<int>(MOVE_ID::LEFT)])
 	{
 		_pos.x -= 2;
 		_turn = true;
+		if (_pos.x >= lpSceneMng.ScreenCenter.x)
+		{
+			lpSceneMng.Pos[2] = lpSceneMng.Pos[2] - 2;
+		}
 	}
 
 	if (_input->state(INPUT_ID::RIGHT).first || _input->state(INPUT_ID::LEFT).first)
@@ -134,6 +143,11 @@ void player::Screen(void)
 		{
 			lpSceneMng.Pos[j] = lpSceneMng.Pos[j] + lpSceneMng.ScreenSize.x * 2;
 		}
+	}
+
+	if (_pos.x < lpSceneMng.ScreenCenter.x)
+	{
+		lpSceneMng.Pos[2] = 900.0;
 	}
 }
 

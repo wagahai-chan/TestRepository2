@@ -5,6 +5,7 @@
 #include <common\Vector2.h>
 #include <ACT_ID.h>
 #include <OBJ_ID.h>
+#include <Scene/LAYER_ID.h>
 
 enum class STATE
 {
@@ -101,7 +102,9 @@ protected:
 
 	Vector2Dbl _pos;
 	Vector2Dbl _size;
+	double _rate;
 	double _rad;		// Šp“x
+	LAYER _layer;
 	bool _turn;			// ‰æ‘œ”½“]
 };
 

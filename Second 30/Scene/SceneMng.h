@@ -6,6 +6,7 @@
 #include <Scene\BaseScene.h>
 #include <Scene/TitleScene.h>
 #include <common\ImageMng.h>
+#include "LAYER_ID.h"
 #include <vector>
 #include <map>
 
@@ -14,6 +15,7 @@ enum class DRAW_QUE // enum‚ÍŒ^‚ªB–† class‚ğ‚Â‚¯‚é‚Æclass–¼–¼‘O‹óŠÔ‚¾‚©‚çX‚Æ‚
 	IMAGE,
 	X,
 	Y,
+	RATE,
 	RAD,
 	ZORDER,		// Ú²Ô°“à‚Ì•`‰æ‡(”’l“à‚Ì’á‚¢‚Ù‚¤‚ª‰œ)
 	LAYER,		// ID‚Ì¬‚³‚¢‚Ù‚¤‚ª‰œ‚É•`‰æ
@@ -23,8 +25,8 @@ enum class DRAW_QUE // enum‚ÍŒ^‚ªB–† class‚ğ‚Â‚¯‚é‚Æclass–¼–¼‘O‹óŠÔ‚¾‚©‚çX‚Æ‚
 
 #define lpSceneMng SceneMng::GetInstance()
 
-using DrawQueT = std::tuple<int, double, double, double,bool>;
-						//  id    x        y     rad    ”½–Ê
+using DrawQueT = std::tuple<int, double, double,double, double,LAYER,bool>;
+						//  id    x        y    Šg‘å—¦   rad   ”½–Ê
 
 class SceneMng
 {
@@ -62,7 +64,7 @@ public:
 	const Vector2 ScreenCenter;			// ½¸Ø°İ‚Ì’†S
 
 	double PX;		// ÌßÚ²Ô°‚Æ‰æ–Ê’†‰›‚Æ‚Ì·•ª
-	double Pos[2];
+	double Pos[3];
 	bool check[static_cast<int>(UNIT_ID::MAX)][4];		// ‚Ç‚ê‚©ˆê‚Â‚Å‚à‚ ‚½‚Á‚Ä‚¢‚ê‚Îtrue‚É‚µ‚Ä“®‚«‚ğ~‚ß‚é
 	
 	bool makeFlag = false;	// true:MakeScene  false:GameScene

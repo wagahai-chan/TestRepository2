@@ -11,6 +11,7 @@ SceneMng::SceneMng() :ScreenSize{ 1000,750 }, ScreenCenter{ScreenSize / 2} // ｺﾝ
 	PX = 0.0;
 	Pos[0] = 400.0;
 	Pos[1] = 1200.0;
+	Pos[2] = 900.0;
 
 	for (int x = 0; x < static_cast<int>(UNIT_ID::MAX); x++)
 	{
@@ -22,20 +23,31 @@ SceneMng::SceneMng() :ScreenSize{ 1000,750 }, ScreenCenter{ScreenSize / 2} // ｺﾝ
 }
 void SceneMng::Draw(void)
 {
+	// layerIDをsortする　ラムダ式を使う
+
+	std::sort(_drawList.begin(), _drawList.end(),
+		[](DrawQueT dQueA, DrawQueT dQueB) {		// sortするためには二つの情報が必要だから二つのｵﾌﾞｼﾞｪｸﾄを用意する
+		return
+			std::tie(std::get<static_cast<int>(DRAW_QUE::LAYER)>(dQueA), std::get<static_cast<int>(DRAW_QUE::ZORDER)>(dQueA))
+			<
+			std::tie(std::get<static_cast<int>(DRAW_QUE::LAYER)>(dQueB), std::get<static_cast<int>(DRAW_QUE::ZORDER)>(dQueB)); // zOrderが小さいほど前に置く
+	});
+
 	ClsDrawScreen();
 
 	for (auto dQue : _drawList)
 	{
-		double x, y, rad;
+		double x, y, rad,rate;
 		int id;
+		LAYER layer;
 		bool turn;
 
-		std::tie(id, x, y, rad,turn) = dQue;
+		std::tie(id, x, y,rate, rad,layer,turn) = dQue;
 
 		DrawRotaGraph(
 			static_cast<int>(x) + (PX),
 			static_cast<int>(y),
-			1.0,
+			rate,
 			rad,
 			id,
 			true,
@@ -124,6 +136,7 @@ bool SceneMng::SysInit(void)
 	lpImageMng.GetID("white", "image/white.png");
 	lpImageMng.GetID("縦", "image/line.png");
 	lpImageMng.GetID("横", "image/line2.png");
+	lpImageMng.GetID("数字", "image/number.png", { 32,32 }, { 10,1 });
 
 	lpImageMng.GetID("ｷｬﾗ", "image/kyara2.png", { 50,50 }, { 1,1 });
 	lpImageMng.GetID("ｷｬﾗrun", "image/kyara6.png", { 50,50 }, { 20,1 });

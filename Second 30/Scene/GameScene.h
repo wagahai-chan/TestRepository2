@@ -32,4 +32,6 @@ private:
 	friend FuncCheckMove;
 	std::vector<sharedObj> _objList;
 	void RunActQue(std::vector<ActQueT> actList)  override;
+
+	int cnt = 1861;
 };

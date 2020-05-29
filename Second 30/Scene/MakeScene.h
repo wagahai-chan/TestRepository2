@@ -29,5 +29,6 @@ private:
 	void RunDeleteQue(std::vector<DeleteQueT> deleteList) override;
 	void draw(void);	
 	void File(void);
+	char moji;
 };
 

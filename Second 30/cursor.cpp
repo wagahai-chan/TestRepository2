@@ -45,6 +45,7 @@ cursor::cursor(Vector2Dbl pos, Vector2Dbl size)
 
 	_unitID = UNIT_ID::CURSOR;
 	_objID = OBJ_ID::NON;
+	_layer = LAYER::CHAR;
 
 	Init();
 }
@@ -58,7 +59,7 @@ void cursor::Update(void)
 	change();
 	Gap();
 
-	lpSceneMng.AddDrawQue({ name[num],_pos.x + gap.x,_pos.y + gap.y,0,false });
+	lpSceneMng.AddDrawQue({ name[num],_pos.x + gap.x,_pos.y + gap.y,1.0,0,LAYER::CHAR,false });
 
 	if (!_input->state(INPUT_ID::RIGHTBUTTON).first && _input->state(INPUT_ID::RIGHTBUTTON).second && !Check())
 	{

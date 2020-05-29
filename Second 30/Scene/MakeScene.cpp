@@ -12,6 +12,8 @@ MakeScene::MakeScene()
 	
 
 	lpSceneMng._saveList.emplace_back(new cursor({ 200.0,300.0 }, { 30,30 }));
+
+	
 }
 
 
@@ -155,21 +157,27 @@ void MakeScene::RunDeleteQue(std::vector<DeleteQueT> deleteList)
 
 void MakeScene::draw(void)
 {
-	lpSceneMng.AddDrawQue({ IMAGE_ID("white")[0],lpSceneMng.ScreenCenter.x,lpSceneMng.ScreenCenter.y,0,false });
+	lpSceneMng.AddDrawQue({ IMAGE_ID("white")[0],lpSceneMng.ScreenCenter.x,lpSceneMng.ScreenCenter.y,1.0,0,LAYER::BG,false });
 
 	for (int y = 0; y < 600; y += 50)
 	{
 		for (int x = 0; x < 1000; x += 50)
 		{
-			lpSceneMng.AddDrawQue({ IMAGE_ID("c")[0],x,lpSceneMng.ScreenCenter.y - 75.0,0,false });
+			lpSceneMng.AddDrawQue({ IMAGE_ID("c")[0],x,lpSceneMng.ScreenCenter.y - 75.0,1.0,0,LAYER::CHAR,false });
 		}
-		lpSceneMng.AddDrawQue({ IMAGE_ID("‰¡")[0],lpSceneMng.ScreenCenter.x,y,0,false });
+		lpSceneMng.AddDrawQue({ IMAGE_ID("‰¡")[0],lpSceneMng.ScreenCenter.x,y,1.0,0,LAYER::CHAR,false });
 	}
-	lpSceneMng.AddDrawQue({ IMAGE_ID("c")[0],lpSceneMng.ScreenSize.x - 1,lpSceneMng.ScreenCenter.y,0,false });
-	lpSceneMng.AddDrawQue({ IMAGE_ID("‰¡")[0],lpSceneMng.ScreenCenter.x,lpSceneMng.ScreenSize.y - 1,0,false });
+	lpSceneMng.AddDrawQue({ IMAGE_ID("c")[0],lpSceneMng.ScreenSize.x - 1,lpSceneMng.ScreenCenter.y,1.0,0,LAYER::CHAR,false });
+	lpSceneMng.AddDrawQue({ IMAGE_ID("‰¡")[0],lpSceneMng.ScreenCenter.x,lpSceneMng.ScreenSize.y - 1,1.0,0,LAYER::CHAR,false });
 
-	lpSceneMng.AddDrawQue({ IMAGE_ID("ÌÞÛ¯¸")[0],100.0,675.0,0,false });
-	lpSceneMng.AddDrawQue({ IMAGE_ID("ÄÞ×Ñ")[0],150.0,675.0,0,false });
+	lpSceneMng.AddDrawQue({ IMAGE_ID("ÌÞÛ¯¸")[0],100.0,675.0,1.0,0,LAYER::CHAR,false });
+	lpSceneMng.AddDrawQue({ IMAGE_ID("·¬×")[0],	150.0,675.0,1.0,0,LAYER::CHAR,false });
+	lpSceneMng.AddDrawQue({ IMAGE_ID("‹˜")[0],200.0,675.0,1.0,0,LAYER::CHAR,false });
+	lpSceneMng.AddDrawQue({ IMAGE_ID("¹Þ°Ä")[0],300.0,675.0,1.0,0,LAYER::CHAR,false });
+	lpSceneMng.AddDrawQue({ IMAGE_ID("½²¯Á")[0],350.0,675.0,1.0,0,LAYER::CHAR,false });
+	lpSceneMng.AddDrawQue({ IMAGE_ID("ÄÞ×Ñ")[0],400.0,675.0,1.0,0,LAYER::CHAR,false });
+	lpSceneMng.AddDrawQue({ IMAGE_ID("–Ø")[0],500.0,675.0,0.25,0,LAYER::CHAR,false });
+
 }
 
 void MakeScene::File(void)

@@ -19,7 +19,7 @@ GameScene::GameScene()
 	else
 	{
 		//_objListÇ…ÇÕílÇ™ì¸Ç¡ÇƒÇ¢Ç»Ç¢Ç©ÇÁóvëf(INPUT_IDï™)ÇÃÉTÉCÉYÇämï€ÇµÇ»Ç¢Ç∆Ç¢ÇØÇ»Ç¢
-		//_objList.resize(lpSceneMng._saveList.end());
+		//_objList.resize(static_cast<size_t>(lpSceneMng._saveList.end()));
 		fread(
 			_objList.data(),
 			sizeof(_objList[0]),
@@ -28,6 +28,7 @@ GameScene::GameScene()
 		fclose(file);
 	}
 
+	//std::copy(lpSceneMng._saveList.begin(), lpSceneMng._saveList.end(), std::back_inserter(_objList));
 
 	lpSceneMng.makeFlag = false;
 }
@@ -39,8 +40,19 @@ GameScene::~GameScene()
 
 unique_Base GameScene::Update(unique_Base own)
 {
-	lpSceneMng.AddDrawQue({ IMAGE_ID("îwåi")[0],lpSceneMng.Pos[0],lpSceneMng.ScreenCenter.y,0,false });
-	lpSceneMng.AddDrawQue({ IMAGE_ID("îwåi")[0],lpSceneMng.Pos[1],lpSceneMng.ScreenCenter.y,0,false });
+	cnt--;
+
+	lpSceneMng.AddDrawQue({ IMAGE_ID("îwåi")[0],lpSceneMng.Pos[0],lpSceneMng.ScreenCenter.y,1.0,0,LAYER::BG,false });
+	lpSceneMng.AddDrawQue({ IMAGE_ID("îwåi")[0],lpSceneMng.Pos[1],lpSceneMng.ScreenCenter.y,1.0,0,LAYER::BG,false });
+
+	lpSceneMng.AddDrawQue({ IMAGE_ID("êîéö")[cnt / 60 / 10],lpSceneMng.Pos[2],50.0,1.0,0,LAYER::UI,false });
+	lpSceneMng.AddDrawQue({ IMAGE_ID("êîéö")[cnt / 60 % 10],lpSceneMng.Pos[2] + 32.0,50.0,1.0,0,LAYER::UI,false });
+
+	if (cnt < 0)
+	{
+		return std::make_unique<GoalScene>();
+	}
+	
 
 	for (auto data : _objList)
 	{
@@ -58,6 +70,15 @@ unique_Base GameScene::Update(unique_Base own)
 		(*data).Update();
 
 	}
+
+	/*for (auto data : _objList)
+	{
+		if ((*data).unitID() == UNIT_ID::PLAYER)
+		{
+			lpSceneMng.AddDrawQue({ IMAGE_ID("êîéö")[0],(*data).pos().x + lpSceneMng.ScreenCenter.x - 50.0,50.0,0,false });
+		}
+
+	}*/
 
 	
 

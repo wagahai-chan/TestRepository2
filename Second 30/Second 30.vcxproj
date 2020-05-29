@@ -132,6 +132,8 @@
     <ClCompile Include="Crimp\gate.cpp" />
     <ClCompile Include="Crimp\drum.cpp" />
     <ClCompile Include="cursor.cpp" />
+    <ClCompile Include="Scene\LAYER_ID.cpp" />
+    <ClCompile Include="Scene\GameOver.cpp" />
     <ClCompile Include="OBJ_ID.cpp" />
     <ClCompile Include="Scene\MakeScene.cpp" />
     <ClCompile Include="Scene\func\FuncCheckDeath.cpp" />
@@ -160,6 +162,8 @@
     <ClInclude Include="Crimp\gate.h" />
     <ClInclude Include="Crimp\drum.h" />
     <ClInclude Include="cursor.h" />
+    <ClInclude Include="Scene\LAYER_ID.h" />
+    <ClInclude Include="Scene\GameOver.h" />
     <ClInclude Include="OBJ_ID.h" />
     <ClInclude Include="Scene\MakeScene.h" />
     <ClInclude Include="Scene\func\FuncCheckDeath.h" />
